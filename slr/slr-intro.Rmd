@@ -39,7 +39,11 @@ class: title-slide
 
 - Use simple linear regression to describe the relationship between a quantitative predictor and quantitative response variable.
 
+--
+
 - Estimate the slope and intercept of the regression line using the least squares method.
+
+--
 
 - Interpret the slope and intercept of the regression line.
 
@@ -260,10 +264,13 @@ $$\text{residual} = \text{observed} - \text{predicted} = y - \hat{y}$$
 
 ## Least squares line
 
+--
+
 - The residual for the $i^{th}$ observation is
 
 $$e_i = \text{observed} - \text{predicted}
 = y_i - \hat{y}_i$$
+
 --
 
 - The .vocab[sum of squared residuals] is 
@@ -369,9 +376,15 @@ $$\hat{\text{audience}} = 32.296 + 0.518 \times \text{critics}$$
 
 ## Recap
 
-- Use simple linear regression to describe the relationship between a quantitative predictor and quantitative response variable.
+- Used simple linear regression to describe the relationship between a quantitative predictor and quantitative response variable.
 
-- Use the least squares method to estimate the slope and intercept.
+--
+
+- Used the least squares method to estimate the slope and intercept.
+
+
+--
+
 
 - **Interpretations**:
   - **Slope**: For each additional value of $x$, we expect y to change by $\hat{\beta}_1$ units, on average. 
