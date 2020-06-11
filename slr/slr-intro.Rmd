@@ -302,7 +302,7 @@ $$\begin{aligned} &s_X = 30.169 \\[5pt]
 
 --
 
-.pull-right[
+.pull-more-right[
 .small-box-work[
 $$\begin{aligned}\hat{\beta}_1 &= 0.781 \times \frac{20.024}{30.169} \\[10pt]
 &= \mathbf{0.518}\end{aligned}$$
