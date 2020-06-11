@@ -5,7 +5,7 @@ author: "Dr. Maria Tackett"
 output:
   xaringan::moon_reader:
     mathjax: "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"
-    css: "test.css"
+    css: "slides.css"
     logo: "img/introregression-sticker.png"
     lib_dir: libs
     nature:
@@ -13,7 +13,7 @@ output:
       highlightLines: true
       countIncrementalSlides: false
       ratio: 4:3
-      slideNumberFormat: ""
+      slideNumberFormat: "%current%"
     seal: false #make custom title slide
 editor_options: 
   chunk_output_type: console

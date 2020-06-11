@@ -127,6 +127,7 @@ li{
   margin: 10px 0;
   font-size: 22pt;
 }
+
 .large { font-size: 130% }
 .midi { font-size: 90% }
 .small { font-size: 80% }
@@ -188,7 +189,6 @@ thead, tfoot, tr:nth-child(even) { background: #eee }
 .vocab {
   color: #aa008e;
   font-weight: bold;
-  font-size: 22pt;
 }
 
 /*Words to emphasize, but not necessarily vocab.*/
