@@ -157,7 +157,7 @@ ggplot(data = movie_aug, aes(x = .fitted, y = .resid)) +
 
 ```{r}
 ggplot(data = movie_aug, aes(x = .fitted, y = .resid)) + 
-  geom_point() + 
+  geom_point(alpha = 0.7) + 
   geom_hline(yintercept = 0, color = "red") +
   labs(x = "Fitted values", 
        y = "Residuals") +
@@ -191,12 +191,46 @@ ggplot(data = movie_aug, aes(x = .fitted, y = .resid)) +
 
 ---
 
-### Violations 
+### Violation: distinguishable pattern
 
-[INCLUDE SOME PLOTS!]
+```{r fig.height = 4}
+set.seed(1234)
+n <- 250
+x.fan <- seq(0,3.99,4/n)
+y.fan <- c(rnorm(n/8,3,1),rnorm(n/8,3.5,2),rnorm(n/8,4,2.5),rnorm(n/8,4.5,3),rnorm(n/4,5,4),rnorm((n/4)+2,6,5))
 
-- No linear
-- Constant Variance
+x.curve <- c(runif(n-2, 0, 4), 2, 2.1)
+y.curve <- -2*x.curve^3 + rnorm(n, sd=9)
+
+df <- tibble(x.fan, y.fan, x.curve, y.curve)
+
+lm.fan <- lm(y.fan ~ x.fan, data = df)
+fan.aug <- augment(lm.fan)
+
+lm.curve <- lm(y.curve ~ x.curve, data = df)
+curve.aug <- augment(lm.curve)
+
+ggplot(data = curve.aug, aes(x = .fitted, y = .resid)) +
+  geom_point(alpha = 0.9) +
+  geom_hline(yintercept = 0, color = "red") +
+  labs(x = "Fitted", 
+       y = "Residuals") +
+  theme_bw()
+```
+
+
+---
+
+### Violation: non-constant variance
+
+```{r fig.height = 4}
+ggplot(data = fan.aug, aes(x = .fitted, y = .resid)) +
+  geom_point(alpha= 0.9) +
+  geom_hline(yintercept = 0, color = "red") +
+  labs(x = "Fitted values", 
+       y = "Residuals") +
+  theme_bw()
+```
 
 ---
 
@@ -209,6 +243,7 @@ A <font class = "vocab">normal quantile plot</font> is a scatterplot of the quan
 --
 
 ```{r}
+set.seed(1234)
 norm_data <- tibble(x = rnorm(1000,0,1))
 
 p1 <- ggplot(norm_data, aes(x = x)) +
@@ -238,7 +273,7 @@ If the distribution of the observed data is approximately normal, the points wil
 ```{r}
 resid_hist <- ggplot(data = movie_aug, aes(x = .resid)) + 
   geom_histogram() + 
-  labs(x = "Residuals") +
+  labs(x = "Residuals values") +
   theme_bw()
 
 resid_qq <- ggplot(data = movie_aug, aes(sample = .resid)) + 
