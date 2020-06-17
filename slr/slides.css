@@ -58,7 +58,6 @@ a, a > code {
 }
 .remark-code-line-highlighted { 
   background-color: #ffff88; 
-  
 }
 
 .inverse {
@@ -190,6 +189,15 @@ thead, tfoot, tr:nth-child(even) { background: #eee }
   color: #aa008e;
   font-weight: bold;
 }
+
+/*code to remark-code-line-highlight */
+
+.term {
+    font-family: 'Source Code Pro', 'Lucida Console', Monaco, monospace;
+    color: #aa008e;
+    font-weight: bold;
+}
+
 
 /*Words to emphasize, but not necessarily vocab.*/
 .emph {

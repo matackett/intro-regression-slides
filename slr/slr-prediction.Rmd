@@ -62,7 +62,7 @@ library(MASS)
 
 ## Cats data
 
-The data set contains the **heart weight** (.vocab[`Hwt`]) and **body weight** (.vocab[`Bwt`]) for 144 domestic cats.
+The data set contains the **heart weight** (.term[Hwt]) and **body weight** (.term[Bwt]) for 144 domestic cats.
 
 ```{r echo = F}
 ggplot(data = cats, aes(x = Bwt, y = Hwt)) +
@@ -195,6 +195,7 @@ predict(bwt_hwt_model, x0, interval = "confidence", #<<
            conf.level = 0.95) %>% 
   kable(format = "html", digits = 3)
 ```
+<br> 
 
 --
 
@@ -212,6 +213,7 @@ predict(bwt_hwt_model, x0, interval = "predict",
            conf.level = 0.95) %>%
   kable(format = "html", digits = 3)
 ```
+<br> 
 
 --
 
@@ -272,7 +274,7 @@ If we extrapolate, the predictions are unreliable since we can't be sure the sam
 ## Predict Andy's heart weight?
 
 .pull-left[
-My cat Andy weighs about 8.60 kg (10 lbs).
+My cat Andy weighs about 5.44 kg (12 lbs).
 
 <br>
 
@@ -295,10 +297,10 @@ knitr::include_graphics("img/andy.JPG")
 ```{r}
 ggplot(data = cats, aes(x = Bwt, y = Hwt)) +
   geom_point(alpha = 0.5) + 
-  geom_vline(xintercept = 8.6, color = "red") +
+  geom_vline(xintercept = 5.4, color = "red") +
   labs(x = "Body Weight (kg)",
        y = "Heart Weight (g)") +
-  annotate("text", x = 8.2, y = 17, label = "Andy", color = "red") +
+  annotate("text", x = 5.2, y = 17, label = "Andy", color = "red") +
   theme_bw()
 ```
 
@@ -314,13 +316,15 @@ We should **<u>not</u>** use this model to predict Andy's heart weight, since th
 
 --
 
-- Predicted the repsonse given a value of the predictor variable
+- Predicted the response given a value of the predictor variable
 
 --
 
 - Used intervals to quantify the uncertainty in the predicted values 
     - Confidence interval for the mean response
     - Prediction interval for individual response
+
+--
 
 - Discussed why extrapolation is unwise when using a model for prediction
 ---

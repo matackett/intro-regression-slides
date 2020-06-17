@@ -46,7 +46,7 @@ class: title-slide
 
 ## Cats data
 
-The data set contains the **heart weight** (.vocab[`Hwt`]) and **body weight** (.vocab[`Bwt`]) for 144 domestic cats.
+The data set contains the **heart weight** (.term[Hwt]) and **body weight** (.term[Bwt]) for 144 domestic cats.
 
 &lt;img src="slr-prediction_files/figure-html/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /&gt;
 
@@ -195,6 +195,7 @@ The 95% .vocab[confidence interval] for the .vocab[*mean*] heart weight of cats 
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;br&gt; 
 
 --
 
@@ -223,6 +224,7 @@ The 95% .vocab[prediction interval] for an .vocab[*individual*] cat that weighs 
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;br&gt; 
 
 --
 
@@ -253,7 +255,7 @@ If we extrapolate, the predictions are unreliable since we can't be sure the sam
 ## Predict Andy's heart weight?
 
 .pull-left[
-My cat Andy weighs about 8.60 kg (10 lbs).
+My cat Andy weighs about 5.44 kg (12 lbs).
 
 &lt;br&gt;
 
@@ -285,13 +287,15 @@ We should **&lt;u&gt;not&lt;/u&gt;** use this model to predict Andy's heart weig
 
 --
 
-- Predicted the repsonse given a value of the predictor variable
+- Predicted the response given a value of the predictor variable
 
 --
 
 - Used intervals to quantify the uncertainty in the predicted values 
     - Confidence interval for the mean response
     - Prediction interval for individual response
+
+--
 
 - Discussed why extrapolation is unwise when using a model for prediction
 ---
