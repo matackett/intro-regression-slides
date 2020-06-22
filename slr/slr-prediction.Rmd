@@ -47,7 +47,8 @@ class: title-slide
    
 --
 
-- Discuss why extrapolation is unwise when using a model for prediction
+- Define *extrapolation* and why we should avoid it
+
 
 ```{r packages}
 library(tidyverse)
@@ -119,13 +120,13 @@ We can use the regression model to
 
 --
 
-1. Estimate the.vocab[<u>mean</u>] response when the predictor variable is equal to a value $x_0$
+Estimate the .vocab[<u>mean</u>] response when the predictor variable is equal to a value $x_0$
 
 <br> 
 
 --
 
-2. Predict the response for an .vocab[<u>individual</u>] observation with a value of the predictor equal to $x_0$
+Predict the response for an .vocab[<u>individual</u>] observation with a value of the predictor equal to $x_0$
 
 ---
 
@@ -179,20 +180,36 @@ $$\hat{y} \pm t_{n-2}^* \times \color{purple}{\mathbf{SE_{\hat{y}}}}$$
 --
 
 .eq[
-$$SE(\hat{\mu}) = \hat{\sigma}\sqrt{\frac{1}{n} + \frac{(x-\bar{x})^2}{\sum\limits_{i=1}^n(x_i - \bar{x})^2}}$$
+$$SE_{\hat{\mu}} = \hat{\sigma}\sqrt{\frac{1}{n} + \frac{(x-\bar{x})^2}{\sum\limits_{i=1}^n(x_i - \bar{x})^2}}$$
 ]
 
 --
 
 .eq[
-$$SE(\hat{y}) = \hat{\sigma}\sqrt{\mathbf{\color{purple}{1}} + \frac{1}{n} + \frac{(x-\bar{x})^2}{\sum\limits_{i=1}^n(x_i - \bar{x})^2}}$$
+$$SE_{\hat{y}} = \hat{\sigma}\sqrt{1 + \frac{1}{n} + \frac{(x-\bar{x})^2}{\sum\limits_{i=1}^n(x_i - \bar{x})^2}}$$
+]
+
+---
+
+## Standard errors
+
+.eq[
+$$SE_{\hat{\mu}} = \hat{\sigma}\sqrt{\frac{1}{n} + \frac{(x-\bar{x})^2}{\sum\limits_{i=1}^n(x_i - \bar{x})^2}}$$
+]
+
+.eq[
+$$SE_{\hat{y}} = \hat{\sigma}\sqrt{\mathbf{\color{purple}{\Large{1}}} + \frac{1}{n} + \frac{(x-\bar{x})^2}{\sum\limits_{i=1}^n(x_i - \bar{x})^2}}$$
 ]
 
 ---
 
 ## Confidence interval
 
+--
+
 The 95% .vocab[confidence interval] for the .vocab[*mean*] heart weight of cats that weigh 3.18 kg is
+
+--
 
 ```{r}
 x0 <- data.frame(Bwt = c(3.18))
@@ -205,13 +222,17 @@ predict(bwt_hwt_model, x0, interval = "confidence", #<<
 --
 
 .alert[
-We are 95% confident that mean heart weight for cats that weigh 3.18 kg is between 12.143 g and 12.801 g.
+We are 95% confident that mean heart weight for the subset of cats that weigh 3.18 kg is between 12.143 g and 12.801 g.
 ]
 ---
 
 ## Prediction interval
 
+--
+
 The 95% .vocab[prediction interval] for an .vocab[*individual*] cat that weighs 3.18 kg is
+
+--
 
 ```{r}
 predict(bwt_hwt_model, x0, interval = "predict",
@@ -261,7 +282,7 @@ ggplot(data = cats, aes(x = Bwt, y = Hwt)) +
                      labels = c("Confidence interval for mean", "Prediction interval for individual"), 
                      name = "") +
   theme(legend.position = "top", 
-        legend.text = element_text(size = 20), 
+        legend.text = element_text(size = 14), 
         axis.title=element_text(size=14))
 ```
 
@@ -269,12 +290,11 @@ ggplot(data = cats, aes(x = Bwt, y = Hwt)) +
 
 ## Caution! Extrapolation 
 
-We should **<u>not</u>** use the model to predict for values of $X$ far outside the range of values used to fit the model. This is called .vocab[extrapolation]. 
+We should **<u>not</u>** use the model to predict for values of $X$ far outside the range of values used to fit the model. 
 
---
+<br>
 
-If we extrapolate, the predictions are unreliable since we can't be sure the same linear relationship holds outside of the range of values in our data set.
-
+This is called .vocab[extrapolation]. 
 ---
 
 ## Predict Andy's heart weight?
@@ -288,7 +308,7 @@ Should we use this regression model to predict his heart weight?
 ]
 
 .pull-right[
-```{r echo = F, out.height = '75%', out.width = '75%'}
+```{r echo = F, out.height = '85%', out.width = '75%'}
 knitr::include_graphics("img/andy.JPG")
 ```
 ]
@@ -297,7 +317,7 @@ knitr::include_graphics("img/andy.JPG")
 
 ## Predict Andy's heart weight?
 
-```{r}
+```{r fig.height = 3.5}
 ggplot(data = cats, aes(x = Bwt, y = Hwt)) +
   geom_point(alpha = 0.5) + 
   geom_vline(xintercept = 5.4, color = "red") +
@@ -330,4 +350,4 @@ We should **<u>not</u>** use this model to predict Andy's heart weight, since th
 
 --
 
-- Discussed why extrapolation is unwise when using a model for prediction
+- Defined .vocab[extrapolation] and why we should avoid it

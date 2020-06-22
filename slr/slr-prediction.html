@@ -38,7 +38,8 @@ class: title-slide
    
 --
 
-- Discuss why extrapolation is unwise when using a model for prediction
+- Define *extrapolation* and why we should avoid it
+
 
 
 
@@ -56,13 +57,10 @@ The data set contains the **heart weight** (.term[Hwt]) and **body weight** (.te
 
 The weight of a cat's heart is used to determine the appropriate dosage for heart medicine.
 
---
 
 &lt;img src="slr-prediction_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
 
---
-
-We want to fit a model that uses a cat's body weight to predict how much its heart weighs.
+We want to fit a model so we can use a cat's body weight to predict how much its heart weighs.
 
 ---
 
@@ -108,19 +106,17 @@ class: regular
 
 ## Prediction
 
-We can use the regression model to predict 
+We can use the regression model to
 
 --
 
-1. The .vocab[&lt;u&gt;mean&lt;/u&gt;] response when the predictor variable is equal to a value `\(x_0\)`
+Estimate the .vocab[&lt;u&gt;mean&lt;/u&gt;] response when the predictor variable is equal to a value `\(x_0\)`
+
+&lt;br&gt; 
 
 --
 
-2. The response for an .vocab[&lt;u&gt;individual&lt;/u&gt;] observation with a value of the predictor equal to `\(x_0\)`
-
---
-
-The predicted value will be the same in both cases, but the uncertainty around the prediction will differ. 
+Predict the response for an .vocab[&lt;u&gt;individual&lt;/u&gt;] observation with a value of the predictor equal to `\(x_0\)`
 
 ---
 
@@ -129,7 +125,7 @@ The predicted value will be the same in both cases, but the uncertainty around t
 .pull-left[
 My cat Mindy weighs about 3.18 kg (7 lbs). 
 
-What is her predicted heart weight? 
+Based on this model, about how much does her heart weigh?
 ]
 
 .pull-right[
@@ -151,33 +147,57 @@ $$
 
 ## Uncertainty in predictions
 
+--
+
 .eq[
-**Confidence interval for the mean response `\(\mu_Y\)`**
-`$$\hat{y} \pm t^* \times \color{purple}{\mathbf{SE}_{\hat{\boldsymbol{\mu}}}}$$`
+**Confidence interval for the mean response**
+`$$\hat{y} \pm t_{n-2}^* \times \color{purple}{\mathbf{SE}_{\hat{\boldsymbol{\mu}}}}$$`
 ]
+
+--
 
 .eq[
 **Prediction interval for an individual observation**
-`$$\hat{y} \pm t^* \times \color{purple}{\mathbf{SE_{\hat{y}}}}$$`
+`$$\hat{y} \pm t_{n-2}^* \times \color{purple}{\mathbf{SE_{\hat{y}}}}$$`
 ]
 
 ---
 
-### Standard errors
+## Standard errors
+
+--
 
 .eq[
-`$$SE(\hat{\mu}) = \hat{\sigma}\sqrt{\frac{1}{n} + \frac{(x-\bar{x})^2}{\sum\limits_{i=1}^n(x_i - \bar{x})^2}}$$`
+`$$SE_{\hat{\mu}} = \hat{\sigma}\sqrt{\frac{1}{n} + \frac{(x-\bar{x})^2}{\sum\limits_{i=1}^n(x_i - \bar{x})^2}}$$`
 ]
+
 --
+
 .eq[
-`$$SE(\hat{y}) = \hat{\sigma}\sqrt{\mathbf{\color{purple}{1}} + \frac{1}{n} + \frac{(x-\bar{x})^2}{\sum\limits_{i=1}^n(x_i - \bar{x})^2}}$$`
+`$$SE_{\hat{y}} = \hat{\sigma}\sqrt{1 + \frac{1}{n} + \frac{(x-\bar{x})^2}{\sum\limits_{i=1}^n(x_i - \bar{x})^2}}$$`
+]
+
+---
+
+## Standard errors
+
+.eq[
+`$$SE_{\hat{\mu}} = \hat{\sigma}\sqrt{\frac{1}{n} + \frac{(x-\bar{x})^2}{\sum\limits_{i=1}^n(x_i - \bar{x})^2}}$$`
+]
+
+.eq[
+`$$SE_{\hat{y}} = \hat{\sigma}\sqrt{\mathbf{\color{purple}{\Large{1}}} + \frac{1}{n} + \frac{(x-\bar{x})^2}{\sum\limits_{i=1}^n(x_i - \bar{x})^2}}$$`
 ]
 
 ---
 
 ## Confidence interval
 
+--
+
 The 95% .vocab[confidence interval] for the .vocab[*mean*] heart weight of cats that weigh 3.18 kg is
+
+--
 
 &lt;table&gt;
  &lt;thead&gt;
@@ -200,13 +220,17 @@ The 95% .vocab[confidence interval] for the .vocab[*mean*] heart weight of cats 
 --
 
 .alert[
-We are 95% confident that mean heart weight for cats that weigh 3.18 kg is between 12.143 g and 12.801 g.
+We are 95% confident that mean heart weight for the subset of cats that weigh 3.18 kg is between 12.143 g and 12.801 g.
 ]
 ---
 
 ## Prediction interval
 
+--
+
 The 95% .vocab[prediction interval] for an .vocab[*individual*] cat that weighs 3.18 kg is
+
+--
 
 &lt;table&gt;
  &lt;thead&gt;
@@ -244,12 +268,11 @@ We are 95% confident the heart weight for an individual cat that weighs 3.18 kg 
 
 ## Caution! Extrapolation 
 
-We should **&lt;u&gt;not&lt;/u&gt;** use the model to predict for values of `\(X\)` far outside the range of values used to fit the model. This is called .vocab[extrapolation]. 
+We should **&lt;u&gt;not&lt;/u&gt;** use the model to predict for values of `\(X\)` far outside the range of values used to fit the model. 
 
---
+&lt;br&gt;
 
-If we extrapolate, the predictions are unreliable since we can't be sure the same linear relationship holds outside of the range of values in our data set.
-
+This is called .vocab[extrapolation]. 
 ---
 
 ## Predict Andy's heart weight?
@@ -263,11 +286,8 @@ Should we use this regression model to predict his heart weight?
 ]
 
 .pull-right[
-&lt;img src="img/andy.JPG" width="75%" height="75%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/andy.JPG" width="75%" height="85%" style="display: block; margin: auto;" /&gt;
 ]
-
-
-
 
 ---
 
@@ -297,7 +317,7 @@ We should **&lt;u&gt;not&lt;/u&gt;** use this model to predict Andy's heart weig
 
 --
 
-- Discussed why extrapolation is unwise when using a model for prediction
+- Defined .vocab[extrapolation] and why we should avoid it
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
