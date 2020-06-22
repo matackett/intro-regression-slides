@@ -390,17 +390,3 @@ $$\hat{\text{audience}} = 32.296 + 0.518 \times \text{critics}$$
   - **Slope**: For every one unit increase in $x$, we expect y to change by $\hat{\beta}_1$ units, on average. 
   - **Intercept**: If $x$ is 0, then we expect $y$ to be $\hat{\beta}_0$ units.
  
-
----
-
-class: title-slide 
-
-<br><br>
-
-# Simple Linear Regression 
-## Introduction 
-
-<br><br><br>
-
-### Dr. Maria Tackett
-
