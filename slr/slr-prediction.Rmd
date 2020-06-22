@@ -69,7 +69,8 @@ ggplot(data = cats, aes(x = Bwt, y = Hwt)) +
   geom_point(alpha = 0.7) + 
   labs(x = "Body Weight (kg)",
        y = "Heart Weight (g)") +
-  theme_bw()
+  theme_bw() +
+  theme(axis.title=element_text(size=14))
 ```
 
 ---
@@ -78,7 +79,6 @@ ggplot(data = cats, aes(x = Bwt, y = Hwt)) +
 
 The weight of a cat's heart is used to determine the appropriate dosage for heart medicine.
 
---
 
 ```{r echo = F}
 ggplot(data = cats, aes(x = Bwt, y = Hwt)) +
@@ -86,12 +86,11 @@ ggplot(data = cats, aes(x = Bwt, y = Hwt)) +
   geom_smooth(method = "lm", color = "blue", se = FALSE) +
   labs(x = "Body Weight (kg)",
        y = "Heart Weight (g)") +
-  theme_bw()
+  theme_bw() +
+  theme(axis.title=element_text(size=14))
 ```
 
---
-
-We want to fit a model that uses a cat's body weight to predict how much its heart weighs.
+We want to fit a model so we can use a cat's body weight to predict how much its heart weighs.
 
 ---
 
@@ -116,19 +115,17 @@ class: regular
 
 ## Prediction
 
-We can use the regression model to predict 
+We can use the regression model to
 
 --
 
-1. The .vocab[<u>mean</u>] response when the predictor variable is equal to a value $x_0$
+1. Estimate the.vocab[<u>mean</u>] response when the predictor variable is equal to a value $x_0$
+
+<br> 
 
 --
 
-2. The response for an .vocab[<u>individual</u>] observation with a value of the predictor equal to $x_0$
-
---
-
-The predicted value will be the same in both cases, but the uncertainty around the prediction will differ. 
+2. Predict the response for an .vocab[<u>individual</u>] observation with a value of the predictor equal to $x_0$
 
 ---
 
@@ -137,7 +134,7 @@ The predicted value will be the same in both cases, but the uncertainty around t
 .pull-left[
 My cat Mindy weighs about 3.18 kg (7 lbs). 
 
-What is her predicted heart weight? 
+Based on this model, about how much does her heart weigh?
 ]
 
 .pull-right[
@@ -161,24 +158,32 @@ $$
 
 ## Uncertainty in predictions
 
+--
+
 .eq[
-**Confidence interval for the mean response $\mu_Y$**
-$$\hat{y} \pm t^* \times \color{purple}{\mathbf{SE}_{\hat{\boldsymbol{\mu}}}}$$
+**Confidence interval for the mean response**
+$$\hat{y} \pm t_{n-2}^* \times \color{purple}{\mathbf{SE}_{\hat{\boldsymbol{\mu}}}}$$
 ]
+
+--
 
 .eq[
 **Prediction interval for an individual observation**
-$$\hat{y} \pm t^* \times \color{purple}{\mathbf{SE_{\hat{y}}}}$$
+$$\hat{y} \pm t_{n-2}^* \times \color{purple}{\mathbf{SE_{\hat{y}}}}$$
 ]
 
 ---
 
-### Standard errors
+## Standard errors
+
+--
 
 .eq[
 $$SE(\hat{\mu}) = \hat{\sigma}\sqrt{\frac{1}{n} + \frac{(x-\bar{x})^2}{\sum\limits_{i=1}^n(x_i - \bar{x})^2}}$$
 ]
+
 --
+
 .eq[
 $$SE(\hat{y}) = \hat{\sigma}\sqrt{\mathbf{\color{purple}{1}} + \frac{1}{n} + \frac{(x-\bar{x})^2}{\sum\limits_{i=1}^n(x_i - \bar{x})^2}}$$
 ]
@@ -256,7 +261,8 @@ ggplot(data = cats, aes(x = Bwt, y = Hwt)) +
                      labels = c("Confidence interval for mean", "Prediction interval for individual"), 
                      name = "") +
   theme(legend.position = "top", 
-        legend.text = element_text(size = 20))
+        legend.text = element_text(size = 20), 
+        axis.title=element_text(size=14))
 ```
 
 ---
@@ -287,9 +293,6 @@ knitr::include_graphics("img/andy.JPG")
 ```
 ]
 
-
-
-
 ---
 
 ## Predict Andy's heart weight?
@@ -301,7 +304,8 @@ ggplot(data = cats, aes(x = Bwt, y = Hwt)) +
   labs(x = "Body Weight (kg)",
        y = "Heart Weight (g)") +
   annotate("text", x = 5.2, y = 17, label = "Andy", color = "red") +
-  theme_bw()
+  theme_bw() +
+  theme(axis.title=element_text(size=14))
 ```
 
 --
@@ -327,16 +331,3 @@ We should **<u>not</u>** use this model to predict Andy's heart weight, since th
 --
 
 - Discussed why extrapolation is unwise when using a model for prediction
----
-
-class: title-slide 
-
-<br><br>
-
-# Simple Linear Regression 
-## Prediction
-
-<br><br><br>
-
-### Dr. Maria Tackett
-
