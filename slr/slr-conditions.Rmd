@@ -1,6 +1,6 @@
 ---
 title: "Simple Linear Regression"
-subtitle: "Assessing Conditions"
+subtitle: "Conditions"
 author: "Dr. Maria Tackett"
 output:
   xaringan::moon_reader:
@@ -27,7 +27,7 @@ class: title-slide
 <br><br>
 
 # Simple Linear Regression 
-## Assessing Conditions
+## Model conditions
 
 <br><br><br>
 
@@ -39,11 +39,11 @@ class: title-slide
 
 --
 
-- Identify the conditions for simple linear regression
+- List the conditions for simple linear regression
   
 --
 
-- Use plots of the residuals to assess the conditions. 
+- Use plots of the residuals to assess the conditions 
 
 ```{r packages, echo = F}
 library(tidyverse)
@@ -64,23 +64,23 @@ movie_scores <- fandango %>%
 
 ## Movie ratings data 
 
-The data set contains the "Tomatometer" score (**`critics`**) and audience score (**`audience`**) for 146 movies rated on rottentomatoes.com. 
+The data set contains the "Tomatometer" score (.term[critics]) and audience score (.term[audience]) for 146 movies rated on rottentomatoes.com. 
 
 ```{r}
 ggplot(data = movie_scores, mapping = aes(x = critics, y = audience)) +
   geom_point(alpha = 0.5) + 
   labs(x = "Critics Score" , 
        y = "Audience Score") +
-  theme_bw()
+  theme_bw() +
+  theme(axis.title=element_text(size=14))
 ```
 
 
 ---
 
-class: middle 
+## The model
 
-We fit a line to describe the relationship between the critics score and audience score.
-
+$$\color{red}{\hat{\text{audience}} = 32.316 + 0.519 \times \text{critics}}$$
 
 ```{r}
 model <- lm(audience ~ critics, data = movie_scores)
@@ -99,7 +99,8 @@ ggplot(data = movie_scores, mapping = aes(x = critics, y = audience)) +
   geom_smooth(method = "lm", color = "red", se = FALSE) +
   labs(x = "Critics Score" , 
        y = "Audience Score") +
-  theme_bw()
+  theme_bw() +
+  theme(axis.title=element_text(size=14))
 ```
 
 ---
@@ -120,8 +121,7 @@ ggplot(data = movie_scores, mapping = aes(x = critics, y = audience)) +
 
 --
 
-4. .vocab[Independence: ]The errors are independent from one another.
-
+4. .vocab[Independence: ]The errors are independent from each other.
 ---
 
 class: middle, center
@@ -132,36 +132,36 @@ $$\text{residual} = y - \hat{y}$$
 
 ---
 
-### Plot of residuals vs. fitted values
+## Residuals vs. fitted values
 
 ```{r}
 movie_aug <- augment(model)
 ```
 
-```{r}
+```{r, fig.height = 3.5}
 ggplot(data = movie_aug, aes(x = .fitted, y = .resid)) + 
   geom_point(alpha = 0.7) + 
   geom_hline(yintercept = 0, color = "red") +
   labs(x = "Fitted values", 
        y = "Residuals") +
-  theme_bw()
+  theme_bw() +
+  theme(axis.title=element_text(size=14))
 ```
 
 ---
 
-## Assessing linearity
-
-.vocab[Linearity: ]There is a linear relationship between the response and predictor variable.
+## Checking linearity
 
 --
 
-```{r}
+```{r, fig.height = 3}
 ggplot(data = movie_aug, aes(x = .fitted, y = .resid)) + 
   geom_point(alpha = 0.7) + 
   geom_hline(yintercept = 0, color = "red") +
-  labs(x = "Fitted values", 
-       y = "Residuals") +
-  theme_bw()
+  labs(x = "Fitted value", 
+       y = "Residual") +
+  theme_bw() +
+  theme(axis.title=element_text(size=14))
 ```
 
 --
@@ -170,28 +170,27 @@ ggplot(data = movie_aug, aes(x = .fitted, y = .resid)) +
 
 ---
 
-### Assessing constant variance
-
-.vocab[Constant Variance: ]The variability of the errors is equal for all values of the predictor variable.
+## Checking constant variance
 
 --
 
-```{r}
+```{r, fig.height = 3}
 ggplot(data = movie_aug, aes(x = .fitted, y = .resid)) + 
   geom_point(alpha = 0.7) + 
   geom_hline(yintercept = 0, color = "red") +
-  labs(x = "Fitted values", 
-       y = "Residuals") +
-  theme_bw()
+  labs(x = "Fitted value", 
+       y = "Residual") +
+  theme_bw() +
+  theme(axis.title=element_text(size=14))
 ```
 
 --
 
-`r emo::ji("white_check_mark")` The vertical spread of the residuals is relatively constant.
+`r emo::ji("white_check_mark")` The vertical spread of the residuals is relatively constant across the plot.
 
 ---
 
-### Violation: distinguishable pattern
+## Violation: distinguishable pattern
 
 ```{r fig.height = 4}
 set.seed(1234)
@@ -213,75 +212,69 @@ curve.aug <- augment(lm.curve)
 ggplot(data = curve.aug, aes(x = .fitted, y = .resid)) +
   geom_point(alpha = 0.9) +
   geom_hline(yintercept = 0, color = "red") +
-  labs(x = "Fitted", 
-       y = "Residuals") +
-  theme_bw()
+  labs(x = "Fitted value", 
+       y = "Residual") +
+  theme(axis.title=element_text(size=14))
 ```
 
 
 ---
 
-### Violation: non-constant variance
+## Violation: non-constant variance
 
 ```{r fig.height = 4}
 ggplot(data = fan.aug, aes(x = .fitted, y = .resid)) +
   geom_point(alpha= 0.9) +
   geom_hline(yintercept = 0, color = "red") +
-  labs(x = "Fitted values", 
-       y = "Residuals") +
-  theme_bw()
+  labs(x = "Fitted value", 
+       y = "Residual") +
+  theme(axis.title=element_text(size=14))
 ```
 
 ---
 
-### Normal quantile plot
+## Normal quantile plot
 
-<font class = "midi">
-A <font class = "vocab">normal quantile plot</font> is a scatterplot of the quantiles of the observed data (x-axis) versus the theoretical quantiles from a sample of the same size that is perfectly normal.
-</font>
-
---
-
-```{r}
+```{r, fig.height = 4}
 set.seed(1234)
 norm_data <- tibble(x = rnorm(1000,0,1))
 
 p1 <- ggplot(norm_data, aes(x = x)) +
-  geom_histogram()
+  geom_histogram() +
+  labs(title = "Histogram") +
+  theme(axis.title=element_text(size=14))
 
 p2 <- ggplot(norm_data, aes(sample = x)) +
   stat_qq() + 
-  stat_qq_line()
+  stat_qq_line() +
+  labs(title = "Normal Quantile Plot", 
+       x = "Theoretical quantile", 
+       y = "Observed quantile") +
+  theme(axis.title=element_text(size=14))
 
 p1 + p2
 ```
 
---
-
-<font class = "midi">
-If the distribution of the observed data is approximately normal, the points will follow a straight diagonal line.
-</font>
-
 ---
 
-## Assessing normality
-
-.vocab[Normality: ]The errors follow a normal distribution.
+## Checking normality
 
 --
 
-```{r}
+```{r, fig.height = 3}
 resid_hist <- ggplot(data = movie_aug, aes(x = .resid)) + 
   geom_histogram() + 
-  labs(x = "Residuals values") +
-  theme_bw()
+  labs(x = "Residual value") +
+  theme_bw() +
+  theme(axis.title=element_text(size=14))
 
 resid_qq <- ggplot(data = movie_aug, aes(sample = .resid)) + 
   stat_qq() + 
   stat_qq_line() +
-  labs(x = "Observed quantiles", 
-       y= "Theoretical quantiles") +
-  theme_bw()
+  labs(x = "Theoretical quantile", 
+       y= "Observed quantile") +
+  theme_bw() +
+  theme(axis.title=element_text(size=14))
 
 resid_hist + resid_qq
 ```
@@ -292,23 +285,19 @@ resid_hist + resid_qq
 
 ---
 
-### Assessing independence
+## Checking independence
 
-.vocab[Independence: ]The errors are independent from one another.
-
---
-
-- We can often assess the independence assumption based on the context of the data and how the observations were collected.
+- We can often check the independence assumption based on the context of the data and how the observations were collected.
 
 --
 
-- If the data were collected in a particular order (e.g., over time), you can examine a scatterplot of the residuals versus order in which the data were collected. 
+- If the data were collected in a particular order, examine a scatterplot of the residuals versus order in which the data were collected. 
 
 ---
 
-### In practice 
+## In practice 
 
-As you assess the model conditions, ask if any observed deviation from the model conditions provide sufficient evidence that
+As you assess the model conditions, ask if any observed deviation from the model conditions are so great that
 
 `r emo::ji("one")` a different model should be proposed. 
 
@@ -316,7 +305,7 @@ As you assess the model conditions, ask if any observed deviation from the model
 
 --
 
-If not, the conditions are satisfied sufficiently enough to proceed.
+`r emo::ji("white_check_mark")` If not, the conditions are sufficiently met and we can proceed with the current model.
 
 ---
 
@@ -324,25 +313,12 @@ If not, the conditions are satisfied sufficiently enough to proceed.
 
 --
 
-- Identified the conditions for simple linear regression: 
-  1. Linearity
-  1. Constant Variance
-  1. Normality
-  1. Independence
+- Listed the conditions for simple linear regression: 
+  - .vocab[Linearity]
+  - .vocab[Constant Variance]
+  - .vocab[Normality]
+  - .vocab[Independence]
+
 --
 
-- Used plots of the residuals to assess the conditions. 
-
----
-
-class: title-slide 
-
-<br><br>
-
-# Simple Linear Regression 
-## Assessing Conditions 
-
-<br><br><br>
-
-### Dr. Maria Tackett
-
+- Used plots of the residuals to check the conditions. 
