@@ -287,11 +287,18 @@ resid_hist + resid_qq
 
 ## Checking independence
 
+--
+
 - We can often check the independence assumption based on the context of the data and how the observations were collected.
 
 --
 
 - If the data were collected in a particular order, examine a scatterplot of the residuals versus order in which the data were collected. 
+<br>
+
+--
+
+`r emo::ji("white_check_mark")` The observations are independent or there is no pattern in the plot of residuals vs. order.
 
 ---
 
@@ -299,9 +306,13 @@ resid_hist + resid_qq
 
 As you check the model conditions, ask if any observed deviation from the model conditions are so great that
 
+--
+
 `r emo::ji("one")` a different model should be proposed. 
 
-`r emo::ji("one")` conclusions drawn from the model should be used with caution.
+--
+
+`r emo::ji("two")` conclusions drawn from the model should be used with caution.
 
 --
 
@@ -313,12 +324,8 @@ As you check the model conditions, ask if any observed deviation from the model 
 
 --
 
-- Listed the conditions for simple linear regression: 
+- Used plots of the residuals to check conditions for simple linear regression: 
   - .vocab[Linearity]
   - .vocab[Constant Variance]
   - .vocab[Normality]
   - .vocab[Independence]
-
---
-
-- Used plots of the residuals to check the conditions
