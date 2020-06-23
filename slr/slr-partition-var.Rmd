@@ -1,0 +1,223 @@
+---
+title: "Simple Linear Regression"
+subtitle: "Partioning variability"
+author: "Dr. Maria Tackett"
+output:
+  xaringan::moon_reader:
+    mathjax: "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"
+    css: "slides.css"
+    logo: "img/introregression-sticker.png"
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: 4:3
+      slideNumberFormat: "%current%"
+    seal: false #make custom title slide
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r child = "setup.Rmd"}
+```
+
+class: title-slide 
+
+<br><br>
+
+# Simple Linear Regression 
+## Partitioning variability
+<br><br><br>
+
+### Dr. Maria Tackett
+
+---
+
+## Topics 
+
+--
+
+
+```{r packages}
+library(tidyverse)
+library(broom)
+library(knitr)
+library(kableExtra)
+library(patchwork)
+library(MASS)
+```
+
+---
+
+## Cats data
+
+The data set contains the **heart weight** (.term[Hwt]) and **body weight** (.term[Bwt]) for 144 domestic cats.
+
+```{r echo = F}
+ggplot(data = cats, aes(x = Bwt, y = Hwt)) +
+  geom_point(alpha = 0.7) + 
+  geom_smooth(method = "lm", color = "blue", se = FALSE) +
+  labs(x = "Body Weight (kg)",
+       y = "Heart Weight (g)") +
+  theme_bw() +
+  theme(axis.title=element_text(size=14))
+```
+
+---
+
+## The model
+
+.eq[
+$$\hat{\text{Hwt}} = -0.357 + 4.034 \times \text{Bwt}$$
+]
+
+<br>
+
+```{r echo = F}
+bwt_hwt_model <- lm(Hwt ~ Bwt, data = cats)
+bwt_hwt_model %>%
+  tidy() %>%
+  kable(format = "html", digits = 3)
+```
+
+---
+
+## Distribution of response
+
+```{r fig.height = 3}
+ggplot(data = cats, aes(x = Hwt)) +
+  geom_histogram(fill = "steelblue", color = "grey") +
+  labs(x = "Heart Weight (g)") + 
+  theme_bw() + 
+  theme(axis.title=element_text(size=14))
+```
+
+<br>
+
+```{r}
+cats %>%
+  summarise(Mean = mean(Hwt), `Std. Dev.` = sd(Hwt), 
+           `IQR` = IQR(Hwt)) %>%
+  kable(format = "html", digits = 3)
+```
+
+---
+
+class: middle, center
+
+.alert[
+How much of the variability in cats' heart weights can be explained by knowing their body weights?
+]
+
+---
+
+## ANOVA
+
+We will use .vocab[Analysis of Variance (ANOVA)] to partition the variation in the response variable $Y$.
+
+
+<br>
+
+```{r fig.align = "center", out.width = '300%'}
+include_graphics("img/model-anova.png")
+```
+
+---
+
+## Total variation 
+
+```{r echo = F}
+mean_y <- mean(cats$Hwt)
+
+ggplot(data = cats, aes(x = Bwt, y = Hwt)) +
+  geom_point(alpha = 0.5) + 
+  geom_hline(yintercept = mean_y, color = "black") +
+  geom_segment(aes(x=Bwt, xend=Bwt, y=Hwt, yend=mean_y), color = "blue") +
+  labs(x = "Body Weight (kg)",
+       y = "Heart Weight (g)") +
+  theme_bw() +
+  theme(axis.title=element_text(size=14))
+```
+
+sum of squares total
+---
+
+## Explained variation (Model)
+
+```{r echo = F}
+ggplot(data = cats, aes(x = Bwt, y = Hwt)) +
+  geom_point(alpha = 0.5) + 
+  geom_smooth(method = "lm", se = FALSE) +
+  geom_hline(yintercept = mean_y, color = "black") +
+  geom_segment(aes(x=Bwt, xend=Bwt, y = mean_y, yend=predict(bwt_hwt_model)), color = "blue") +
+  labs(x = "Body Weight (kg)",
+       y = "Heart Weight (g)") +
+  theme_bw() +
+  theme(axis.title=element_text(size=14))
+```
+
+Sum of squares Model
+---
+
+## Unexplained variation 
+
+```{r echo = F}
+ggplot(data = cats, aes(x = Bwt, y = Hwt)) +
+  geom_point(alpha = 0.5) + 
+  geom_smooth(method = "lm", se = FALSE) +
+  geom_hline(yintercept = mean_y, color = "black") +
+  geom_segment(aes(x=Bwt, xend=Bwt, y = Hwt, yend=predict(bwt_hwt_model)), color = "blue") +
+  labs(x = "Body Weight (kg)",
+       y = "Heart Weight (g)") +
+  theme_bw() +
+  theme(axis.title=element_text(size=14))
+```
+
+Sum of squares Error
+
+
+---
+
+## Put it all together
+
+
+---
+
+## $R^2$
+
+### $R^2$
+
+The .vocab[coefficient of determination, $R^2$] is the proportion of variation in $Y$ that is explained by the regression model 
+
+### Calculating $R^2$
+.instructions[
+$$R^2 = \frac{\text{TSS} - \text{RSS}}{\text{TSS}} = 1 - \frac{\text{RSS}}{\text{TSS}}$$
+]
+- <font class="vocab">Total Sum of Squares: </font>Total variation in the $Y$'s before fitting the regression 
+$$\text{TSS}= \sum\limits_{i=1}^{n}(y_i - \bar{y})^2 = (n-1)s^2_y$$
+
+- <font class="vocab">Residual Sum of Squares (RSS): </font>Total variation in the $Y$'s around the regression line (sum of squared residuals)
+$$\text{RSS} = \sum\limits_{i=1}^{n}[y_i - (\hat{\beta}_0 + \hat{\beta}_1x_i)]^2$$
+
+
+
+
+---
+
+
+## Recap
+
+--
+
+- Predicted the response given a value of the predictor variable
+
+--
+
+- Used intervals to quantify the uncertainty in the predicted values 
+    - Confidence interval for the mean response
+    - Prediction interval for individual response
+
+--
+
+- Defined .vocab[extrapolation] and why we should avoid it
