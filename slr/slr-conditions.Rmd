@@ -43,7 +43,7 @@ class: title-slide
   
 --
 
-- Use plots of the residuals to assess the conditions 
+- Use plots of the residuals to check the conditions 
 
 ```{r packages, echo = F}
 library(tidyverse)
@@ -297,7 +297,7 @@ resid_hist + resid_qq
 
 ## In practice 
 
-As you assess the model conditions, ask if any observed deviation from the model conditions are so great that
+As you check the model conditions, ask if any observed deviation from the model conditions are so great that
 
 `r emo::ji("one")` a different model should be proposed. 
 
@@ -321,4 +321,4 @@ As you assess the model conditions, ask if any observed deviation from the model
 
 --
 
-- Used plots of the residuals to check the conditions. 
+- Used plots of the residuals to check the conditions
