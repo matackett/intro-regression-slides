@@ -78,7 +78,7 @@ ggplot(data = cats, aes(x = Bwt, y = Hwt)) +
 
 ## Cats data
 
-The weight of a cat's heart is used to determine the appropriate dosage for heart medicine.
+We want to fit a model so we can use a cat's body weight to predict how much its heart weighs.
 
 
 ```{r echo = F}
@@ -91,7 +91,6 @@ ggplot(data = cats, aes(x = Bwt, y = Hwt)) +
   theme(axis.title=element_text(size=14))
 ```
 
-We want to fit a model so we can use a cat's body weight to predict how much its heart weighs.
 
 ---
 
@@ -139,7 +138,7 @@ Based on this model, about how much does her heart weigh?
 ]
 
 .pull-right[
-```{r echo = F, out.height = '60%', out.width = '60%'}
+```{r echo = F, out.height = '70%', out.width = '60%'}
 knitr::include_graphics("img/mindy.JPG")
 ```
 ]
@@ -149,8 +148,8 @@ knitr::include_graphics("img/mindy.JPG")
 .alert[
 $$
 \begin{align}
-\hat{Hwt} &= -0.357 + 4.034 \times \color{purple}{\mathbf{3.18}} \\
-&= \mathbf{12.471} \text{ grams}
+\hat{\text{Hwt}} &= -0.357 + 4.034 \times \color{purple}{\mathbf{3.18}} \\
+&= \mathbf{12.471} \text{ g}
 \end{align}
 $$
 ]
@@ -230,7 +229,7 @@ We are 95% confident that mean heart weight for the subset of cats that weigh 3.
 
 --
 
-The 95% .vocab[prediction interval] for an .vocab[*individual*] cat that weighs 3.18 kg is
+The 95% .vocab[prediction interval] for an .vocab[*individual*] cat (Mindy) that weighs 3.18 kg is
 
 --
 
@@ -244,7 +243,7 @@ predict(bwt_hwt_model, x0, interval = "predict",
 --
 
 .alert[
-We are 95% confident the heart weight for an individual cat that weighs 3.18 kg is between 9.582 g and 15.362 g.
+We can predict with 95% confidence that Mindy's heart weighs between 9.582 g and 15.362 g.
 ]
 
 ---
@@ -304,7 +303,7 @@ My cat Andy weighs about 5.44 kg (12 lbs).
 
 <br>
 
-Should we use this regression model to predict his heart weight? 
+Should we use this regression model to predict how much his heart weighs?
 ]
 
 .pull-right[
