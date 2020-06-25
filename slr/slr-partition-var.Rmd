@@ -186,11 +186,11 @@ Sum of squares Error
 
 ## $R^2$
 
-### $R^2$
 
 The .vocab[coefficient of determination, $R^2$] is the proportion of variation in $Y$ that is explained by the regression model 
 
-### Calculating $R^2$
+[INCLUDE EQUATION!]
+
 .instructions[
 $$R^2 = \frac{\text{TSS} - \text{RSS}}{\text{TSS}} = 1 - \frac{\text{RSS}}{\text{TSS}}$$
 ]
@@ -201,10 +201,32 @@ $$\text{TSS}= \sum\limits_{i=1}^{n}(y_i - \bar{y})^2 = (n-1)s^2_y$$
 $$\text{RSS} = \sum\limits_{i=1}^{n}[y_i - (\hat{\beta}_0 + \hat{\beta}_1x_i)]^2$$
 
 
+---
+
+## $R^2$ for cats data 
+
+- Include and interpret R^2
+
+---
+
+## ANOVA table
 
 
 ---
 
+## ANOVA test for model
+
+
+---
+
+## F distribution 
+
+
+---
+
+## ANOVA test for cats data
+
+---
 
 ## Recap
 
