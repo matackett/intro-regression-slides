@@ -84,7 +84,6 @@ The data set contains the **heart weight** (.term[Hwt]) and **body weight** (.te
 
 &lt;img src="slr-partition-var_files/figure-html/unnamed-chunk-4-1.png" style="display: block; margin: auto;" /&gt;
 
-&lt;br&gt;
 
 &lt;table&gt;
  &lt;thead&gt;
@@ -124,56 +123,103 @@ We will use .vocab[Analysis of Variance (ANOVA)] to partition the variation in t
 
 ---
 
+Plot showing the mean of y and the model 
+
+---
+
 ## Total variation 
 
 &lt;img src="slr-partition-var_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /&gt;
 
-sum of squares total
+
+`$$\large{SS_{Total} = \sum_{i=1}^n(y_i - \bar{y})^2 = (n-1)s_y^2}$$`
+
 ---
 
 ## Explained variation (Model)
 
 &lt;img src="slr-partition-var_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /&gt;
 
-Sum of squares Model
+`$$\large{SS_{Model} = \sum_{i = 1}^{n}(\hat{y}_i - \bar{y})^2}$$`
+
 ---
 
-## Unexplained variation 
+## Unexplained variation (Residuals)
 
 &lt;img src="slr-partition-var_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
 
-Sum of squares Error
 
+`$$\large{SS_{Error} = \sum_{i = 1}^{n}(y_i - \hat{y}_i)^2}$$`
+]
 
 ---
 
-## Put it all together
+class: middle 
 
+`$$\sum_{i=1}^n(y_i - \bar{y})^2 = \sum_{i = 1}^{n}(\hat{y}_i - \bar{y})^2 + \sum_{i = 1}^{n}(y_i - \hat{y}_i)^2$$`
+---
 
+class: middle 
+
+`$$\large{\mathbf{\color{blue}{\sum_{i=1}^n(y_i - \bar{y})^2}}} = \sum_{i = 1}^{n}(\hat{y}_i - \bar{y})^2 + \sum_{i = 1}^{n}(y_i - \hat{y}_i)^2$$`
+
+---
+
+class: middle 
+
+`$$\sum_{i=1}^n(y_i - \bar{y})^2 = \large{\mathbf{\color{blue}{\sum_{i = 1}^{n}(\hat{y}_i - \bar{y})^2}}} + \sum_{i = 1}^{n}(y_i - \hat{y}_i)^2$$`
+
+---
+
+class: middle 
+
+`$$\sum_{i=1}^n(y_i - \bar{y})^2 = \sum_{i = 1}^{n}(\hat{y}_i - \bar{y})^2 + \large{\mathbf{\color{blue}{\sum_{i = 1}^{n}(y_i - \hat{y}_i)^2}}}$$`
 ---
 
 ## `\(R^2\)`
 
 
-The .vocab[coefficient of determination, `\(R^2\)`] is the proportion of variation in `\(Y\)` that is explained by the regression model 
+The .vocab[coefficient of determination, `\(R^2\)`] is the proportion of variation in the response, `\(Y\)`, that is explained by the regression model 
 
-[INCLUDE EQUATION!]
+&lt;br&gt; 
 
-.instructions[
-`$$R^2 = \frac{\text{TSS} - \text{RSS}}{\text{TSS}} = 1 - \frac{\text{RSS}}{\text{TSS}}$$`
+--
+
+.eq[
+`$$R^2 = \large{\frac{SS_{Model}}{SS_{Total}} = 1 - \frac{SS_{Error}}{SS_{Total}}}$$`
 ]
-- &lt;font class="vocab"&gt;Total Sum of Squares: &lt;/font&gt;Total variation in the `\(Y\)`'s before fitting the regression 
-`$$\text{TSS}= \sum\limits_{i=1}^{n}(y_i - \bar{y})^2 = (n-1)s^2_y$$`
-
-- &lt;font class="vocab"&gt;Residual Sum of Squares (RSS): &lt;/font&gt;Total variation in the `\(Y\)`'s around the regression line (sum of squared residuals)
-`$$\text{RSS} = \sum\limits_{i=1}^{n}[y_i - (\hat{\beta}_0 + \hat{\beta}_1x_i)]^2$$`
-
 
 ---
 
-## `\(R^2\)` for cats data 
+## `\(R^2\)` for our model
 
-- Include and interpret R^2
+
+
+.pull-left[
+
+.small-box-work[
+`$$SS_{Model} = 548.092$$` 
+
+`$$SS_{Error} = 299.533$$` 
+
+`$$SS_{Total} = 847.625$$` 
+]
+]
+
+.pull-right[
+.small-box-work[
+`$$\begin{align}R^2 &amp;= \frac{548.092}{847.625} \\[5pt]
+&amp;= 0.647\end{align}$$ 
+]
+]
+
+&lt;br&gt; 
+
+--
+
+.eq[
+About 64.7% of the variation in the heart weight of cats can be explained by their body weight. 
+]
 
 ---
 
