@@ -3,7 +3,8 @@
 options(
   htmltools.dir.version = FALSE, # for blogdown
   show.signif.stars = FALSE,     # for regression output
-  warm = 1
+  warm = 1,
+  knitr.kable.NA = '' #don't print NA when printing tables
   )
 # Set dpi and height for images
 library(knitr)

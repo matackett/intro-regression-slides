@@ -4,6 +4,7 @@
     <title>Simple Linear Regression</title>
     <meta charset="utf-8" />
     <meta name="author" content="Dr. Maria Tackett" />
+    <script src="libs/kePrint/kePrint.js"></script>
     <link rel="stylesheet" href="slides.css" type="text/css" />
   </head>
   <body>
@@ -208,12 +209,10 @@ The .vocab[coefficient of determination, `\(R^2\)`] is the proportion of variati
 
 .pull-right[
 .small-box-work[
-`$$\begin{align}R^2 &amp;= \frac{548.092}{847.625} \\[5pt]
-&amp;= 0.647\end{align}$$ 
+`$$\begin{aligned}R^2 &amp;= \frac{548.092}{847.625} \\[5pt]
+&amp;= 0.647\end{aligned}$$ 
 ]
 ]
-
-&lt;br&gt; 
 
 --
 
@@ -224,6 +223,253 @@ About 64.7% of the variation in the heart weight of cats can be explained by the
 ---
 
 ## ANOVA table
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Source &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Sum Sq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Mean Sq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; F Stat &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Pr(&amp;gt; F) &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Model &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 548.092 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 548.092 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 259.835 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 142 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 299.533 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.109 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Total &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 143 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 847.625 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+## ANOVA table
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Source &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Df &lt;/th&gt;
+   &lt;th style="text-align:right;background-color: #dce5b2 !important;"&gt; Sum Sq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Mean Sq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; F Stat &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Pr(&amp;gt; F) &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Model &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 548.092 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 548.092 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 259.835 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 142 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 299.533 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.109 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Total &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 143 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 847.625 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+## ANOVA table
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Source &lt;/th&gt;
+   &lt;th style="text-align:right;background-color: #dce5b2 !important;"&gt; Df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Sum Sq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Mean Sq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; F Stat &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Pr(&amp;gt; F) &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Model &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 548.092 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 548.092 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 259.835 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 142 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 299.533 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.109 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Total &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 143 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 847.625 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+--
+
+.vocab[Degrees of freedom]
+
+`\(df_{Total} = 144 - 1 = 143\)`
+
+`\(df_{Model} = 1\)`
+
+`\(df_{Error} = 143 - 1 = 142\)`
+
+---
+
+## ANOVA table
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Source &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Sum Sq &lt;/th&gt;
+   &lt;th style="text-align:right;background-color: #dce5b2 !important;"&gt; Mean Sq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; F Stat &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Pr(&amp;gt; F) &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Model &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 548.092 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 548.092 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 259.835 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 142 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 299.533 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 2.109 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Total &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 143 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 847.625 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+--
+
+.vocab[Mean squares]
+
+`\(MS_{Model} = \frac{548.092}{1} = 548.092\)`
+
+`\(MS_{Error} = \frac{299.533}{142} = 2.109\)`
+
+---
+
+## ANOVA table
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Source &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Sum Sq &lt;/th&gt;
+   &lt;th style="text-align:right;background-color: #dce5b2 !important;"&gt; Mean Sq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; F Stat &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Pr(&amp;gt; F) &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Model &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 548.092 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 548.092 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 259.835 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 142 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 299.533 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 2.109 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Total &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 143 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 847.625 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+--
+
+.vocab[F test statistic]: ratio of explained to unexplained variability
+
+`\(F_{(1,142)} = \frac{MS_{Model}}{MS_{Residuals}}= \frac{548.092}{2.109} = 259.835\)`
+
+---
+
+## F distribution 
+
+&lt;img src="slr-partition-var_files/figure-html/unnamed-chunk-16-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+## F distribution 
+
+&lt;img src="slr-partition-var_files/figure-html/unnamed-chunk-17-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -243,20 +489,6 @@ About 64.7% of the variation in the heart weight of cats can be explained by the
 ---
 
 ## Recap
-
---
-
-- Predicted the response given a value of the predictor variable
-
---
-
-- Used intervals to quantify the uncertainty in the predicted values 
-    - Confidence interval for the mean response
-    - Prediction interval for individual response
-
---
-
-- Defined .vocab[extrapolation] and why we should avoid it
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
