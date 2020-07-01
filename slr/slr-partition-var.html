@@ -30,7 +30,7 @@ class: title-slide
 
 - Use analysis of variance to partition variability in the response variable 
 
-- Calculate and define `\(R^2\)`
+- Define and calculate `\(R^2\)`
 
 - Use ANOVA to test the hypothesis `\(H_0: \beta_1 = 0\)`
 
@@ -130,13 +130,15 @@ We will use .vocab[Analysis of Variance (ANOVA)] to partition the variation in t
 
 ---
 
-Plot showing the mean of y and the model 
+## Response variable, `\(Y\)`, 
+
+&lt;img src="slr-partition-var_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
 ## Total variation 
 
-&lt;img src="slr-partition-var_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="slr-partition-var_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /&gt;
 
 
 `$$\large{SS_{Total} = \sum_{i=1}^n(y_i - \bar{y})^2 = (n-1)s_y^2}$$`
@@ -145,7 +147,7 @@ Plot showing the mean of y and the model
 
 ## Explained variation (Model)
 
-&lt;img src="slr-partition-var_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="slr-partition-var_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
 
 `$$\large{SS_{Model} = \sum_{i = 1}^{n}(\hat{y}_i - \bar{y})^2}$$`
 
@@ -153,11 +155,11 @@ Plot showing the mean of y and the model
 
 ## Unexplained variation (Residuals)
 
-&lt;img src="slr-partition-var_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="slr-partition-var_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" /&gt;
 
 
 `$$\large{SS_{Error} = \sum_{i = 1}^{n}(y_i - \hat{y}_i)^2}$$`
-]
+
 
 ---
 
@@ -168,32 +170,32 @@ class: middle
 
 class: middle 
 
-`$$\large{\mathbf{\color{blue}{\sum_{i=1}^n(y_i - \bar{y})^2}}} = \sum_{i = 1}^{n}(\hat{y}_i - \bar{y})^2 + \sum_{i = 1}^{n}(y_i - \hat{y}_i)^2$$`
+`$$\mathbf{\color{blue}{\sum_{i=1}^n(y_i - \bar{y})^2}} = \sum_{i = 1}^{n}(\hat{y}_i - \bar{y})^2 + \sum_{i = 1}^{n}(y_i - \hat{y}_i)^2$$`
 
 ---
 
 class: middle 
 
-`$$\sum_{i=1}^n(y_i - \bar{y})^2 = \large{\mathbf{\color{blue}{\sum_{i = 1}^{n}(\hat{y}_i - \bar{y})^2}}} + \sum_{i = 1}^{n}(y_i - \hat{y}_i)^2$$`
+`$$\sum_{i=1}^n(y_i - \bar{y})^2 = \mathbf{\color{blue}{\sum_{i = 1}^{n}(\hat{y}_i - \bar{y})^2}} + \sum_{i = 1}^{n}(y_i - \hat{y}_i)^2$$`
 
 ---
 
 class: middle 
 
-`$$\sum_{i=1}^n(y_i - \bar{y})^2 = \sum_{i = 1}^{n}(\hat{y}_i - \bar{y})^2 + \large{\mathbf{\color{blue}{\sum_{i = 1}^{n}(y_i - \hat{y}_i)^2}}}$$`
+`$$\sum_{i=1}^n(y_i - \bar{y})^2 = \sum_{i = 1}^{n}(\hat{y}_i - \bar{y})^2 + \mathbf{\color{blue}{\sum_{i = 1}^{n}(y_i - \hat{y}_i)^2}}$$`
 ---
 
 ## `\(R^2\)`
 
 
-The .vocab[coefficient of determination, `\(R^2\)`] is the proportion of variation in the response, `\(Y\)`, that is explained by the regression model 
+The .vocab[coefficient of determination], &lt;font class = "vocab"&gt;R&lt;sup&gt;2&lt;/sup&gt;&lt;/font&gt;, is the proportion of variation in the response, `\(Y\)`, that is explained by the regression model 
 
 &lt;br&gt; 
 
 --
 
 .eq[
-`$$R^2 = \large{\frac{SS_{Model}}{SS_{Total}} = 1 - \frac{SS_{Error}}{SS_{Total}}}$$`
+`$$\large{R^2 = \frac{SS_{Model}}{SS_{Total}} = 1 - \frac{SS_{Error}}{SS_{Total}}}$$`
 ]
 
 ---
@@ -203,7 +205,6 @@ The .vocab[coefficient of determination, `\(R^2\)`] is the proportion of variati
 
 
 .pull-left[
-
 .small-box-work[
 `$$SS_{Model} = 548.092$$` 
 
@@ -213,18 +214,20 @@ The .vocab[coefficient of determination, `\(R^2\)`] is the proportion of variati
 ]
 ]
 
+--
+
 .pull-right[
 .small-box-work[
-`$$\begin{aligned}R^2 &amp;= \frac{548.092}{847.625} \\[5pt]
-&amp;= 0.647\end{aligned}$$ 
+`$$\begin{aligned}R^2 &amp;= \frac{548.092}{847.625} \\[10pt]
+&amp;= \mathbf{0.647}\end{aligned}$$`
 ]
 ]
 
 --
 
-.eq[
-About 64.7% of the variation in the heart weight of cats can be explained by their body weight. 
-]
+&lt;br&gt; 
+
+.vocab[About 64.7% of the variation in the heart weight of cats can be explained by variation in body weight.]
 
 ---
 
@@ -268,58 +271,6 @@ About 64.7% of the variation in the heart weight of cats can be explained by the
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-
----
-
-## ANOVA
-
-&lt;table&gt;
- &lt;thead&gt;
-  &lt;tr&gt;
-   &lt;th style="text-align:left;"&gt; Source &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Df &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Sum Sq &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Mean Sq &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; F Stat &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Pr(&amp;gt; F) &lt;/th&gt;
-  &lt;/tr&gt;
- &lt;/thead&gt;
-&lt;tbody&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Model &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 548.092 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 548.092 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 259.835 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 142 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 299.533 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2.109 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Total &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 143 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 847.625 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
---
-
-&lt;br&gt;
-
-.eq[
-`$$\large{\begin{align}&amp;H_0: \beta_1 = 0 \\
-&amp;H_a: \beta_1 \neq 0\\ \end{align}}$$`
-]
 
 ---
 
@@ -376,6 +327,57 @@ About 64.7% of the variation in the heart weight of cats can be explained by the
 
 ---
 
+## ANOVA
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Source &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Sum Sq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Mean Sq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; F Stat &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Pr(&amp;gt; F) &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Model &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 548.092 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 548.092 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 259.835 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 142 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 299.533 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.109 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Total &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 143 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 847.625 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+--
+
+&lt;br&gt;
+
+.eq[
+`$$\large{\begin{align}&amp;H_0: \beta_1 = 0 \\
+&amp;H_a: \beta_1 \neq 0\\ \end{align}}$$`
+]
+
+---
 
 ## ANOVA
 
@@ -532,14 +534,14 @@ About 64.7% of the variation in the heart weight of cats can be explained by the
 
 ## F distribution 
 
-&lt;img src="slr-partition-var_files/figure-html/unnamed-chunk-17-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="slr-partition-var_files/figure-html/unnamed-chunk-18-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ---
 
 ## F distribution 
 
-&lt;img src="slr-partition-var_files/figure-html/unnamed-chunk-18-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="slr-partition-var_files/figure-html/unnamed-chunk-19-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -647,7 +649,7 @@ The data provide strong evidence that the true slope parameter, `\(\beta_1\)`, i
 
 - Used analysis of variance to partition variability in the response variable 
 
-- Calculated and defined `\(R^2\)`
+- Defined and calculated `\(R^2\)`
 
 - Used ANOVA to test the hypothesis `\(H_0: \beta_1 = 0\)`
     </textarea>

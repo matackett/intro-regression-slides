@@ -38,7 +38,7 @@ class: title-slide
 
 - Use analysis of variance to partition variability in the response variable 
 
-- Calculate and define $R^2$
+- Define and calculate $R^2$
 
 - Use ANOVA to test the hypothesis $H_0: \beta_1 = 0$
 
@@ -130,7 +130,19 @@ include_graphics("img/model-anova.png")
 
 ---
 
-Plot showing the mean of y and the model 
+## Response variable, $Y$, 
+
+```{r fig.height = 3}
+mean_y <- mean(cats$Hwt)
+
+ggplot(data = cats, aes(x = Bwt, y = Hwt)) +
+  geom_point(alpha = 0.5) + 
+  geom_hline(yintercept = mean_y, color = "blue") +
+  labs(x = "Body Weight (kg)",
+       y = "Heart Weight (g)") +
+  theme_light() +
+  theme(axis.title=element_text(size=14))
+```
 
 ---
 
@@ -188,7 +200,7 @@ ggplot(data = cats, aes(x = Bwt, y = Hwt)) +
 
 
 $$\large{SS_{Error} = \sum_{i = 1}^{n}(y_i - \hat{y}_i)^2}$$
-]
+
 
 ---
 
@@ -199,32 +211,32 @@ $$\sum_{i=1}^n(y_i - \bar{y})^2 = \sum_{i = 1}^{n}(\hat{y}_i - \bar{y})^2 + \sum
 
 class: middle 
 
-$$\large{\mathbf{\color{blue}{\sum_{i=1}^n(y_i - \bar{y})^2}}} = \sum_{i = 1}^{n}(\hat{y}_i - \bar{y})^2 + \sum_{i = 1}^{n}(y_i - \hat{y}_i)^2$$
+$$\mathbf{\color{blue}{\sum_{i=1}^n(y_i - \bar{y})^2}} = \sum_{i = 1}^{n}(\hat{y}_i - \bar{y})^2 + \sum_{i = 1}^{n}(y_i - \hat{y}_i)^2$$
 
 ---
 
 class: middle 
 
-$$\sum_{i=1}^n(y_i - \bar{y})^2 = \large{\mathbf{\color{blue}{\sum_{i = 1}^{n}(\hat{y}_i - \bar{y})^2}}} + \sum_{i = 1}^{n}(y_i - \hat{y}_i)^2$$
+$$\sum_{i=1}^n(y_i - \bar{y})^2 = \mathbf{\color{blue}{\sum_{i = 1}^{n}(\hat{y}_i - \bar{y})^2}} + \sum_{i = 1}^{n}(y_i - \hat{y}_i)^2$$
 
 ---
 
 class: middle 
 
-$$\sum_{i=1}^n(y_i - \bar{y})^2 = \sum_{i = 1}^{n}(\hat{y}_i - \bar{y})^2 + \large{\mathbf{\color{blue}{\sum_{i = 1}^{n}(y_i - \hat{y}_i)^2}}}$$
+$$\sum_{i=1}^n(y_i - \bar{y})^2 = \sum_{i = 1}^{n}(\hat{y}_i - \bar{y})^2 + \mathbf{\color{blue}{\sum_{i = 1}^{n}(y_i - \hat{y}_i)^2}}$$
 ---
 
 ## $R^2$
 
 
-The .vocab[coefficient of determination, $R^2$] is the proportion of variation in the response, $Y$, that is explained by the regression model 
+The .vocab[coefficient of determination], <font class = "vocab">R<sup>2</sup></font>, is the proportion of variation in the response, $Y$, that is explained by the regression model 
 
 <br> 
 
 --
 
 .eq[
-$$R^2 = \large{\frac{SS_{Model}}{SS_{Total}} = 1 - \frac{SS_{Error}}{SS_{Total}}}$$
+$$\large{R^2 = \frac{SS_{Model}}{SS_{Total}} = 1 - \frac{SS_{Error}}{SS_{Total}}}$$
 ]
 
 ---
@@ -241,7 +253,6 @@ sst <- ssm + sse
 ```
 
 .pull-left[
-
 .small-box-work[
 $$SS_{Model} = 548.092$$ 
 
@@ -251,18 +262,20 @@ $$SS_{Total} = 847.625$$
 ]
 ]
 
+--
+
 .pull-right[
 .small-box-work[
-$$\begin{aligned}R^2 &= \frac{548.092}{847.625} \\[5pt]
-&= 0.647\end{aligned}$$ 
+$$\begin{aligned}R^2 &= \frac{548.092}{847.625} \\[10pt]
+&= \mathbf{0.647}\end{aligned}$$
 ]
 ]
 
 --
 
-.eq[
-About 64.7% of the variation in the heart weight of cats can be explained by their body weight. 
-]
+<br> 
+
+.vocab[About 64.7% of the variation in the heart weight of cats can be explained by variation in body weight.]
 
 ---
 
@@ -294,24 +307,6 @@ cats_anova %>%
 
 ---
 
-## ANOVA
-
-```{r}
-cats_anova %>%
-  kable(format = "html", digits = 3) 
-```
-
---
-
-<br>
-
-.eq[
-$$\large{\begin{align}&H_0: \beta_1 = 0 \\
-&H_a: \beta_1 \neq 0\\ \end{align}}$$
-]
-
----
-
 ## ANOVA 
 
 ```{r}
@@ -332,6 +327,23 @@ $SS_{Error} = 847.625 - 548.092 = 299.533$
 
 ---
 
+## ANOVA
+
+```{r}
+cats_anova %>%
+  kable(format = "html", digits = 3) 
+```
+
+--
+
+<br>
+
+.eq[
+$$\large{\begin{align}&H_0: \beta_1 = 0 \\
+&H_a: \beta_1 \neq 0\\ \end{align}}$$
+]
+
+---
 
 ## ANOVA
 
@@ -464,7 +476,7 @@ The data provide strong evidence that the true slope parameter, $\beta_1$, is di
 
 - Used analysis of variance to partition variability in the response variable 
 
-- Calculated and defined $R^2$
+- Defined and calculated $R^2$
 
 - Used ANOVA to test the hypothesis $H_0: \beta_1 = 0$
 
