@@ -354,32 +354,40 @@ $F_{(1,142)} = \frac{MS_{Model}}{MS_{Residuals}}= \frac{548.092}{2.109} = 259.83
 
 ## F distribution 
 
-```{r fig.height = 4.2}
-x <- 0:500/100
-
-# Evaluate the densities
-y <- df(x,10,10)
-
-fdata <- tibble(x = x, y = y)
-
-# Plot the densities
-
-ggplot(data = fdata, aes(x = x, y = y)) +
-  geom_line(color = "steelblue", lwd = 2) +
+```{r fig.height = 4}
+ggplot() +
+  stat_function(fun = "df", 
+                geom = "line", 
+                args = list(df1 = 10, df2 = 10), 
+                color = "steelblue2", lwd = 2, 
+                xlim = c(0, 6)) +
   labs(x = "F", 
-       y = "density") +
+       y = "density") + 
   theme_classic()
+  
 ```
+
 
 ---
 
 ## F distribution 
 
-```{r}
-ggplot(data = fdata, aes(x = x)) +
-  geom_function(fun = df, args = list(df1 = 10, df2 = 10), color = "red", xlim = c(3, 5))
+```{r fig.height = 4}
+ggplot() +
+  stat_function(fun = "df", 
+                geom = "line", 
+                args = list(df1 = 10, df2 = 10), 
+                color = "steelblue2", lwd = 2, 
+                xlim = c(0, 6)) +
+  stat_function(fun = "df", 
+                geom = "area", 
+                args = list(df1 = 10, df2 = 10), fill = "red",
+                xlim = c(2.5, 6)) +
+  labs(x = "F", 
+       y = "density") + 
+  theme_classic()
+  
 ```
-
 
 ---
 
