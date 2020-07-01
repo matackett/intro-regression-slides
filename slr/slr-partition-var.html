@@ -28,6 +28,12 @@ class: title-slide
 
 ## Topics 
 
+- Use analysis of variance to partition variability in the response variable 
+
+- Calculate and define `\(R^2\)`
+
+- Use ANOVA to test the hypothesis `\(H_0: \beta_1 = 0\)`
+
 --
 
 
@@ -222,7 +228,7 @@ About 64.7% of the variation in the heart weight of cats can be explained by the
 
 ---
 
-## ANOVA table
+## ANOVA 
 
 &lt;table&gt;
  &lt;thead&gt;
@@ -265,7 +271,59 @@ About 64.7% of the variation in the heart weight of cats can be explained by the
 
 ---
 
-## ANOVA table
+## ANOVA
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Source &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Sum Sq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Mean Sq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; F Stat &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Pr(&amp;gt; F) &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Model &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 548.092 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 548.092 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 259.835 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 142 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 299.533 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.109 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Total &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 143 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 847.625 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+--
+
+&lt;br&gt;
+
+.eq[
+`$$\large{\begin{align}&amp;H_0: \beta_1 = 0 \\
+&amp;H_a: \beta_1 \neq 0\\ \end{align}}$$`
+]
+
+---
+
+## ANOVA 
 
 &lt;table&gt;
  &lt;thead&gt;
@@ -306,9 +364,20 @@ About 64.7% of the variation in the heart weight of cats can be explained by the
 &lt;/tbody&gt;
 &lt;/table&gt;
 
+--
+
+.vocab[Sum of squares]
+
+`\(SS_{Total} = 847.625\)`
+
+`\(SS_{Model} = 548.092\)`
+
+`\(SS_{Error} = 847.625 - 548.092 = 299.533\)`
+
 ---
 
-## ANOVA table
+
+## ANOVA
 
 &lt;table&gt;
  &lt;thead&gt;
@@ -361,7 +430,7 @@ About 64.7% of the variation in the heart weight of cats can be explained by the
 
 ---
 
-## ANOVA table
+## ANOVA 
 
 &lt;table&gt;
  &lt;thead&gt;
@@ -412,7 +481,7 @@ About 64.7% of the variation in the heart weight of cats can be explained by the
 
 ---
 
-## ANOVA table
+## ANOVA 
 
 &lt;table&gt;
  &lt;thead&gt;
@@ -420,8 +489,8 @@ About 64.7% of the variation in the heart weight of cats can be explained by the
    &lt;th style="text-align:left;"&gt; Source &lt;/th&gt;
    &lt;th style="text-align:right;"&gt; Df &lt;/th&gt;
    &lt;th style="text-align:right;"&gt; Sum Sq &lt;/th&gt;
-   &lt;th style="text-align:right;background-color: #dce5b2 !important;"&gt; Mean Sq &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; F Stat &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Mean Sq &lt;/th&gt;
+   &lt;th style="text-align:right;background-color: #dce5b2 !important;"&gt; F Stat &lt;/th&gt;
    &lt;th style="text-align:right;"&gt; Pr(&amp;gt; F) &lt;/th&gt;
   &lt;/tr&gt;
  &lt;/thead&gt;
@@ -430,24 +499,24 @@ About 64.7% of the variation in the heart weight of cats can be explained by the
    &lt;td style="text-align:left;"&gt; Model &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 548.092 &lt;/td&gt;
-   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 548.092 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 259.835 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 548.092 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 259.835 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 142 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 299.533 &lt;/td&gt;
-   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 2.109 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.109 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt;  &lt;/td&gt;
    &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; Total &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 143 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 847.625 &lt;/td&gt;
-   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt;  &lt;/td&gt;
    &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt;  &lt;/td&gt;
    &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/tbody&gt;
@@ -463,32 +532,124 @@ About 64.7% of the variation in the heart weight of cats can be explained by the
 
 ## F distribution 
 
-&lt;img src="slr-partition-var_files/figure-html/unnamed-chunk-16-1.png" style="display: block; margin: auto;" /&gt;
-
-
----
-
-## F distribution 
-
 &lt;img src="slr-partition-var_files/figure-html/unnamed-chunk-17-1.png" style="display: block; margin: auto;" /&gt;
 
----
-
-## ANOVA test for model
-
 
 ---
 
 ## F distribution 
 
+&lt;img src="slr-partition-var_files/figure-html/unnamed-chunk-18-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
-## ANOVA test for cats data
+## ANOVA 
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Source &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Sum Sq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Mean Sq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; F Stat &lt;/th&gt;
+   &lt;th style="text-align:right;background-color: #dce5b2 !important;"&gt; Pr(&amp;gt; F) &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Model &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 548.092 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 548.092 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 259.835 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 142 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 299.533 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.109 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Total &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 143 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 847.625 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+--
+
+.vocab[P-value]: Probability of observing a test statistic at least as extreme as *F Stat* given the true slope parameter is 0, i.e. `\(H_0: \beta_1 = 0\)` 
+
+---
+
+## ANOVA 
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Source &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Sum Sq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Mean Sq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; F Stat &lt;/th&gt;
+   &lt;th style="text-align:right;background-color: #dce5b2 !important;"&gt; Pr(&amp;gt; F) &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Model &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 548.092 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 548.092 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 259.835 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 142 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 299.533 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.109 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Total &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 143 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 847.625 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+The p-value is very small `\((\approx 0)\)`, so we reject `\(H_0\)`. 
+
+--
+
+The data provide strong evidence that the true slope parameter, `\(\beta_1\)`, is different from 0. 
+
+--
+
+.vocab[There is evidence of a linear relationship between a cat's heart weight and body weight.]
 
 ---
 
 ## Recap
+
+- Used analysis of variance to partition variability in the response variable 
+
+- Calculated and defined `\(R^2\)`
+
+- Used ANOVA to test the hypothesis `\(H_0: \beta_1 = 0\)`
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

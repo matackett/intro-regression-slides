@@ -36,6 +36,12 @@ class: title-slide
 
 ## Topics 
 
+- Use analysis of variance to partition variability in the response variable 
+
+- Calculate and define $R^2$
+
+- Use ANOVA to test the hypothesis $H_0: \beta_1 = 0$
+
 --
 
 
@@ -260,7 +266,7 @@ About 64.7% of the variation in the heart weight of cats can be explained by the
 
 ---
 
-## ANOVA table
+## ANOVA 
 
 ```{r}
 cats_anova <- anova(bwt_hwt_model) %>%
@@ -288,7 +294,25 @@ cats_anova %>%
 
 ---
 
-## ANOVA table
+## ANOVA
+
+```{r}
+cats_anova %>%
+  kable(format = "html", digits = 3) 
+```
+
+--
+
+<br>
+
+.eq[
+$$\large{\begin{align}&H_0: \beta_1 = 0 \\
+&H_a: \beta_1 \neq 0\\ \end{align}}$$
+]
+
+---
+
+## ANOVA 
 
 ```{r}
 cats_anova %>%
@@ -296,9 +320,20 @@ cats_anova %>%
   column_spec(3, background = "#dce5b2", include_thead = T)
 ```
 
+--
+
+.vocab[Sum of squares]
+
+$SS_{Total} = 847.625$
+
+$SS_{Model} = 548.092$
+
+$SS_{Error} = 847.625 - 548.092 = 299.533$
+
 ---
 
-## ANOVA table
+
+## ANOVA
 
 ```{r}
 cats_anova %>%
@@ -318,7 +353,7 @@ $df_{Error} = 143 - 1 = 142$
 
 ---
 
-## ANOVA table
+## ANOVA 
 
 ```{r}
 cats_anova %>%
@@ -336,12 +371,12 @@ $MS_{Error} = \frac{299.533}{142} = 2.109$
 
 ---
 
-## ANOVA table
+## ANOVA 
 
 ```{r}
 cats_anova %>%
   kable(format = "html", digits = 3) %>%
-  column_spec(4, background = "#dce5b2", include_thead = T)
+  column_spec(5, background = "#dce5b2", include_thead = T)
 ```
 
 --
@@ -391,19 +426,46 @@ ggplot() +
 
 ---
 
-## ANOVA test for model
+## ANOVA 
 
+```{r}
+cats_anova %>%
+  kable(format = "html", digits = 3) %>%
+  column_spec(6, background = "#dce5b2", include_thead = T)
+```
+
+--
+
+.vocab[P-value]: Probability of observing a test statistic at least as extreme as *F Stat* given the true slope parameter is 0, i.e. $H_0: \beta_1 = 0$ 
 
 ---
 
-## F distribution 
+## ANOVA 
 
+```{r}
+cats_anova %>%
+  kable(format = "html", digits = 3) %>%
+  column_spec(6, background = "#dce5b2", include_thead = T)
+```
 
----
+The p-value is very small $(\approx 0)$, so we reject $H_0$. 
 
-## ANOVA test for cats data
+--
+
+The data provide strong evidence that the true slope parameter, $\beta_1$, is different from 0. 
+
+--
+
+.vocab[There is evidence of a linear relationship between a cat's heart weight and body weight.]
 
 ---
 
 ## Recap
+
+- Used analysis of variance to partition variability in the response variable 
+
+- Calculated and defined $R^2$
+
+- Used ANOVA to test the hypothesis $H_0: \beta_1 = 0$
+
 
