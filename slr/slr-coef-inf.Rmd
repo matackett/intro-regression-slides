@@ -1,0 +1,356 @@
+---
+title: "Simple Linear Regression"
+subtitle: "Inference"
+author: "Dr. Maria Tackett"
+output:
+  xaringan::moon_reader:
+    mathjax: "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"
+    css: "slides.css"
+    logo: "img/introregression-sticker.png"
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: 4:3
+      slideNumberFormat: "%current%"
+    seal: false #make custom title slide
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r child = "setup.Rmd"}
+```
+
+class: title-slide 
+
+<br><br>
+
+# Simple Linear Regression 
+## Inference
+
+<br><br><br>
+
+### Dr. Maria Tackett
+
+---
+
+## Topics 
+
+--
+
+
+  
+--
+
+
+
+```{r packages, echo = F}
+library(tidyverse)
+library(broom)
+library(knitr)
+library(kableExtra)
+library(patchwork)
+library(fivethirtyeight)
+```
+
+```{r data}
+movie_scores <- fandango %>%
+  rename(critics = rottentomatoes, 
+         audience = rottentomatoes_user)
+```
+
+---
+
+## Movie ratings data 
+
+The data set contains the "Tomatometer" score (**`critics`**) and audience score (**`audience`**) for 146 movies rated on rottentomatoes.com.
+
+```{r}
+ggplot(data = movie_scores, mapping = aes(x = critics, y = audience)) +
+  geom_point(alpha = 0.5) + 
+  labs(x = "Critics Score" , 
+       y = "Audience Score") +
+  theme_bw()
+```
+
+
+---
+
+## Movie ratings data 
+
+We want to fit a line to describe the relationship between the critics score and audience score.
+
+```{r}
+ggplot(data = movie_scores, mapping = aes(x = critics, y = audience)) +
+  geom_point(alpha = 0.5) + 
+  geom_smooth(method = "lm", color = "red", se = FALSE) +
+  labs(x = "Critics Score" , 
+       y = "Audience Score") +
+  theme_bw()
+```
+
+```{r}
+m <- lm(audience ~ critics,data=movie_scores)
+```
+
+---
+
+### Questions of interest
+
+In our example, we will treat the data as a random sample of movies from rottentomatoes.com
+
+**Questions of interest**
+- What is a plausible range of values of the true population slope for `critics`? (<font class = "vocab">confidence interval</font>)
+
+- Is there actually a linear relationship between `critics` and `audience`, or is the relationshp we observed due to random chance? 
+    - We estimated $\hat{\beta}_1 = 0.519$, but is there sufficient evidence to conclude that the true population slope $\beta$ is different from 0? (<font class = "vocab">hypothesis test</font>)
+    
+---
+
+class: middle, center
+
+### What is a plausible range of values of the true population slope for `critics`?
+
+---
+
+### General form of the confidence interval
+
+- Let <font class="vocab">SE</font> be the standard error of the statistic used to estimate the parameter of interest, then the general form of the confidence interval is
+
+.alert[
+$$\text{ Estimate} \pm \text{ (critical value) } \times \text{SE}$$
+]
+- *Note*: The critical value is determined by the distribution of the estimate (statistic) and the confidence level
+
+- For the regression slope: 
+    - $\hat{\beta}_1$ is the statistic used to estimate the parameter, $\beta_1$ 
+    - We will write the confidence interval as 
+    $$\mathbf{\hat{\beta}_1 \pm t^* SE(\hat{\beta}_1)}$$
+    
+---
+
+### Confidence interval for $\beta_1$
+
+- The confidence interval for the regression slope is 
+
+.alert[
+$$\mathbf{\hat{\beta}_1 \pm t^* SE(\hat{\beta}_1)}$$
+]
+
+- $t^*$ is the critical value associated with the confidence level.
+  + It is calculated from a $t$ distribution with $n-2$ degrees of freedom
+  
+- $SE(\hat{\beta}_1)$ is the standard error for the slope 
+
+$$SE(\hat{\beta}_1) = \sqrt{\frac{\hat{\sigma}^2}{\sum\limits_{i=1}^n (x_i - \bar{x})^2}} \hspace{2.5mm} = \hspace{2.5mm} \hat{\sigma}\sqrt{\frac{1}{(n-1)s_X^2}}$$
+
+---
+
+### What is $\hat{\sigma}$?
+
+- Recall, the residual is the difference between the observed response the predicted response (the estimated mean) 
+    - The residual for the ith observation, $(x_i, y_i)$, is
+    
+    $$e_i = y_i - (\hat{\beta}_0 + \hat{\beta}_1 x_i)$$ 
+
+- The <font class = "vocab">Residual Standard Error</font> is the estimate of variation about the regression line
+    - Also known as the **Root Mean Square Error (RMSE)**
+
+.alert[
+$$\hat{\sigma} = \sqrt{\frac{1}{n-2}\sum\limits_{i=1}^{n} e_i^2}$$
+]
+---
+
+### Why *t*? 
+
+.alert[
+$$\hat{\beta}_1 \sim N \Bigg(\beta_1, \sigma\sqrt{\frac{1}{(n-1)s_X^2}} \Bigg)$$
+]
+
+- We don't know $\sigma$, so we use its estimate $\hat{\sigma}$ in our calculations. Therefore, we use the *t* distribution when we calculate the confidence interval (and conduct hypothesis tests) to account for the extra variability that's been introduced (same reason we use *t* when doing inference for a mean)
+
+- The critical value $t^*$ is calculated from the *t(n-2)* distribution - the *t* distribution with *n-2* degrees of freedom.
+
+---
+
+### Movies data: Critical value
+
+```{r}
+qt(0.975, 144)
+```
+
+```{r echo = F}
+ggplot(data.frame(x = c(-4, 4)), aes(x)) +
+  stat_function(fun = dt, args =list(df =144)) +
+  stat_function(fun = dt,   args =list(df =144),
+                xlim = c(-1.976575, 1.976575),
+                geom = "area", fill = "navy") + 
+  geom_text(x=0, y=0.15, label="0.95", color = "white", size = 10) +
+  geom_text(x = -2.2, y = 0.07, label = "-1.977", size = 3) + 
+  geom_text(x =  2.2, y = 0.07, label = "1.977", size = 3)
+```
+
+---
+### Calculating the 95% CI for $\beta_1$
+
+```{r echo = F}
+n <- nrow(movie_scores)
+var.x <- var(movie_scores$critics)
+sigma <- glance(m)$sigma
+beta1 <- tidy(m)$estimate[2]
+crit.val <- qt(0.975, n-2)
+summaries <- tibble(n = n, 
+                    var.x = var.x,
+                    sigma = sigma,
+                    beta1 = beta1, 
+                    crit.val = crit.val)
+summaries %>% kable(format = "markdown", digits = 3)
+```
+
+.instructions[
+Write the equation for the 95% confidence interval for $\beta_1$, the coefficient (slope) of `critics`. 
+]
+
+---
+
+### Interpretation 
+
+```{r}
+m %>%
+  tidy(conf.int=TRUE) %>%
+  kable(format = "markdown", digits = 3)
+```
+
+.instructions[
+Interpret the 95% confidence interval for $\beta_1$, the coefficient (slope) of critics.
+]
+
+---
+
+class: middle, center
+
+### Is there actually a linear relationship between `critics` and `audience`, or is the relationshp we observed due to random chance?
+
+---
+
+### Recall: Outline of Hypothesis Test
+
+1. State the hypotheses
+
+2. Calculate the test statistic 
+
+3. Calculate the p-value
+
+4. State the conclusion in the context of the problem
+
+---
+
+### 1. State the hypotheses
+
+- We are often interested in testing whether there is a statistically significant linear relationship between the predictor and response variables
+
+- If there is actually no linear relationship between the two variables, the population regression slope, $\beta_1$, would equal 0 
+--
+
+- Therefore, let's test the hypotheses: 
+
+.alert[
+$$\begin{aligned}& H_0: \beta_1 = 0\\& H_a: \beta_1 \neq 0\end{aligned}$$
+]
+
+- These are the hypotheses corresponding to the output from the `lm` function
+
+
+---
+
+### 2. Calculate the test statistic
+
+$$\begin{aligned}& H_0: \beta_1 = 0\\& H_a: \beta_1 \neq 0\end{aligned}$$
+
+
+.alert[
+**Test Statistic:**
+$$\begin{aligned}\text{test statistic} &= \frac{\text{Estimate} - \text{Hypothesized}}{SE} \\[10pt]
+&= \frac{\hat{\beta}_1 - 0}{SE(\hat{\beta}_1)}\end{aligned}$$
+]
+
+---
+
+### 3. Calculate the p-value
+
+<font class="vocab">p-value</font> is calculated from a $t$ distribution with $n-2$ degrees of freedom
+
+.alert[
+$$\text{p-value} = P(t \geq |\text{test statistic}|)$$
+]
+
+```{r echo = F}
+ggplot(data.frame(x = c(-4, 4)), aes(x)) +
+  stat_function(fun = dt, args =list(df =144)) +
+  stat_function(fun = dt,   args =list(df =144),
+                xlim = c(-4, -1.5),
+                geom = "area", fill = "navy") + 
+    stat_function(fun = dt,   args =list(df =144),
+                xlim = c(1.5, 4),
+                geom = "area", fill = "navy")
+```
+
+---
+
+
+class: middle, center
+
+.instructions[
+**Write the general definition of the p-value for tests of $\beta_1$.**
+]
+
+---
+
+### 4. State the conclusion 
+
+|  Magnitude of p-value |             Interpretation            |
+|:---------------------:|:-------------------------------------:|
+| p-value < 0.01        | strong evidence against $H_0$         |
+| 0.01 < p-value < 0.05 | moderate evidence against $H_0$       |
+| 0.05 < p-value < 0.1  | weak evidence against $H_0$           |
+| p-value > 0.1         | effectively no evidence against $H_0$ |
+<br> 
+<br>
+
+**Notes:** 
+
+- These are general guidelines. The strength of evidence depends on the context of the problem.
+- Don't just rely on the reject/fail to reject conclusion from the hypothesis test to draw conclusions about the relationship between $x$ and $y$. Use the EDA and confidence intervals to provide more context about the implications of your results.
+
+---
+
+### Movie data: Hypothesis test for $\beta_1$ 
+
+```{r}
+m %>%
+  tidy() %>%
+  kable(format = "markdown", digits = 3)
+```
+
+.instructions[
+a. State the hypotheses in (1) words and (2) statistical notation.  
+
+b. What is the meaning of the test statistic in the context of the problem? 
+
+c. What is the meaning of the p-value in the context of the problem?
+
+d. State the conclusion in context of the problem.
+]
+
+
+
+---
+
+## Recap
+--
+
+
+--
+
+
