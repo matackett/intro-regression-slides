@@ -4,6 +4,7 @@
     <title>Simple Linear Regression</title>
     <meta charset="utf-8" />
     <meta name="author" content="Dr. Maria Tackett" />
+    <script src="libs/kePrint/kePrint.js"></script>
     <link rel="stylesheet" href="slides.css" type="text/css" />
   </head>
   <body>
@@ -44,33 +45,369 @@ class: title-slide
 
 ## Movie ratings data 
 
-The data set contains the "Tomatometer" score (**`critics`**) and audience score (**`audience`**) for 146 movies rated on rottentomatoes.com.
+The data set contains the "Tomatometer" score (.term[critics]) and audience score (.term[audience]) for 146 movies rated on rottentomatoes.com. 
 
 &lt;img src="slr-coef-inf_files/figure-html/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ---
 
-## Movie ratings data 
+## The model
 
-We want to fit a line to describe the relationship between the critics score and audience score.
+`$$\color{red}{\hat{\text{audience}} = 32.316 + 0.519 \times \text{critics}}$$`
 
-&lt;img src="slr-coef-inf_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
 
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; std.error &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 32.316 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.343 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13.795 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; critics &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.519 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.035 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 15.028 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+&lt;img src="slr-coef-inf_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Questions of interest
+
+--
+
+Is there truly linear relationship between `critics` and `audience`, or is the relationshp we observed `\((\hat{\beta}_1 = 0.519)\)` due to random chance? 
+
+&lt;br&gt; 
+
+--
+
+What is a plausible range of values of `\(\beta\)`, the true population slope for `critics`? 
+
+---
+
+class: middle
+
+### Is there truly linear relationship between `critics` and `audience`, or is the relationshp we observed `\((\hat{\beta}_1 = 0.519)\)` due to random chance? 
 
 
 ---
 
-### Questions of interest
+## Outline of a hypothesis test
 
-In our example, we will treat the data as a random sample of movies from rottentomatoes.com
+1️⃣ State the hypotheses.
 
-**Questions of interest**
-- What is a plausible range of values of the true population slope for `critics`? (&lt;font class = "vocab"&gt;confidence interval&lt;/font&gt;)
+2️⃣ Calculate the test statistic. 
 
-- Is there actually a linear relationship between `critics` and `audience`, or is the relationshp we observed due to random chance? 
-    - We estimated `\(\hat{\beta}_1 = 0.519\)`, but is there sufficient evidence to conclude that the true population slope `\(\beta\)` is different from 0? (&lt;font class = "vocab"&gt;hypothesis test&lt;/font&gt;)
-    
+3️⃣ Calculate the p-value.
+
+4️⃣ State the conclusion. 
+
+---
+
+## 1️⃣ State the hypotheses
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; std.error &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 32.316 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.343 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13.795 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; critics &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.519 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.035 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 15.028 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;br&gt;
+
+.pull-left[
+.small-box[
+`$$\large{\begin{aligned}&amp; H_0: \beta_1 = 0\\&amp; H_a: \beta_1 \neq 0\end{aligned}}$$`
+]
+]
+
+---
+
+## 1️⃣ State the hypotheses
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; std.error &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 32.316 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.343 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13.795 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; critics &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.519 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.035 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 15.028 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;br&gt;
+
+.pull-left[
+.small-box[
+`$$\large{\begin{aligned}&amp; H_0: \beta_1 = 0\\&amp; H_a: \beta_1 \neq 0\end{aligned}}$$`
+]
+]
+
+.pull-right[
+&lt;font color = "white"&gt;place-holder&lt;/font&gt;
+
+.big[.vocab[Null hypothesis]]
+
+
+]
+
+---
+
+## 1️⃣ State the hypotheses
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; std.error &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 32.316 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.343 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13.795 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; critics &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.519 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.035 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 15.028 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;br&gt;
+
+.pull-left[
+.small-box[
+`$$\large{\begin{aligned}&amp; H_0: \beta_1 = 0\\&amp; H_a: \beta_1 \neq 0\end{aligned}}$$`
+]
+]
+
+.pull-right[
+&lt;font color = "white"&gt;place-holder&lt;/font&gt;
+ 
+.big[.vocab[Null hypothesis]]
+
+.big[.vocab[Alternative hypothesis]]
+
+]
+
+---
+
+## 2️⃣ Calculate the test statistic
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; std.error &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 32.316 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.343 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13.795 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; critics &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.519 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.035 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 15.028 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;br&gt; 
+
+.pull-left[
+`$$\text{test statistic} = \frac{\text{Estimate} - \text{Hypothesized}}{\text{Standard error}}$$`
+]
+]
+
+---
+
+## 2️⃣ Calculate the test statistic
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; std.error &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 32.316 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.343 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13.795 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;background-color: #dce5b2 !important;"&gt; critics &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.519 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.035 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 15.028 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;br&gt; 
+
+--
+
+.pull-left[
+.eq[
+`$$t = \frac{{\hat{\beta}_1} - 0}{\text{SE}_{\hat{\beta}_1}}$$`
+]
+]
+
+--
+
+.pull-right[
+
+.small-box-work[
+`$$\begin{aligned}t &amp;= \frac{0.5187 - 0}{0.0345}\\
+&amp;= \mathbf{15.03}\end{aligned}$$`
+]
+]
+
+---
+
+### 3. Calculate the p-value
+
+&lt;font class="vocab"&gt;p-value&lt;/font&gt; is calculated from a `\(t\)` distribution with `\(n-2\)` degrees of freedom
+
+.alert[
+`$$\text{p-value} = P(t \geq |\text{test statistic}|)$$`
+]
+
+&lt;img src="slr-coef-inf_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+class: middle, center
+
+.instructions[
+**Write the general definition of the p-value for tests of `\(\beta_1\)`.**
+]
+
+---
+
+### 4. State the conclusion 
+
+|  Magnitude of p-value |             Interpretation            |
+|:---------------------:|:-------------------------------------:|
+| p-value &lt; 0.01        | strong evidence against `\(H_0\)`         |
+| 0.01 &lt; p-value &lt; 0.05 | moderate evidence against `\(H_0\)`       |
+| 0.05 &lt; p-value &lt; 0.1  | weak evidence against `\(H_0\)`           |
+| p-value &gt; 0.1         | effectively no evidence against `\(H_0\)` |
+&lt;br&gt; 
+&lt;br&gt;
+
+**Notes:** 
+
+- These are general guidelines. The strength of evidence depends on the context of the problem.
+- Don't just rely on the reject/fail to reject conclusion from the hypothesis test to draw conclusions about the relationship between `\(x\)` and `\(y\)`. Use the EDA and confidence intervals to provide more context about the implications of your results.
+
+---
+
+### Movie data: Hypothesis test for `\(\beta_1\)` 
+
+
+|term        | estimate| std.error| statistic| p.value|
+|:-----------|--------:|---------:|---------:|-------:|
+|(Intercept) |   32.316|     2.343|    13.795|       0|
+|critics     |    0.519|     0.035|    15.028|       0|
+
+.instructions[
+a. State the hypotheses in (1) words and (2) statistical notation.  
+
+b. What is the meaning of the test statistic in the context of the problem? 
+
+c. What is the meaning of the p-value in the context of the problem?
+
+d. State the conclusion in context of the problem.
+]
 ---
 
 class: middle, center
@@ -146,7 +483,7 @@ class: middle, center
 ## [1] 1.976575
 ```
 
-&lt;img src="slr-coef-inf_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="slr-coef-inf_files/figure-html/unnamed-chunk-14-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 ### Calculating the 95% CI for `\(\beta_1\)`
@@ -174,113 +511,7 @@ Write the equation for the 95% confidence interval for `\(\beta_1\)`, the coeffi
 Interpret the 95% confidence interval for `\(\beta_1\)`, the coefficient (slope) of critics.
 ]
 
----
 
-class: middle, center
-
-### Is there actually a linear relationship between `critics` and `audience`, or is the relationshp we observed due to random chance?
-
----
-
-### Recall: Outline of Hypothesis Test
-
-1. State the hypotheses
-
-2. Calculate the test statistic 
-
-3. Calculate the p-value
-
-4. State the conclusion in the context of the problem
-
----
-
-### 1. State the hypotheses
-
-- We are often interested in testing whether there is a statistically significant linear relationship between the predictor and response variables
-
-- If there is actually no linear relationship between the two variables, the population regression slope, `\(\beta_1\)`, would equal 0 
---
-
-- Therefore, let's test the hypotheses: 
-
-.alert[
-`$$\begin{aligned}&amp; H_0: \beta_1 = 0\\&amp; H_a: \beta_1 \neq 0\end{aligned}$$`
-]
-
-- These are the hypotheses corresponding to the output from the `lm` function
-
-
----
-
-### 2. Calculate the test statistic
-
-`$$\begin{aligned}&amp; H_0: \beta_1 = 0\\&amp; H_a: \beta_1 \neq 0\end{aligned}$$`
-
-
-.alert[
-**Test Statistic:**
-`$$\begin{aligned}\text{test statistic} &amp;= \frac{\text{Estimate} - \text{Hypothesized}}{SE} \\[10pt]
-&amp;= \frac{\hat{\beta}_1 - 0}{SE(\hat{\beta}_1)}\end{aligned}$$`
-]
-
----
-
-### 3. Calculate the p-value
-
-&lt;font class="vocab"&gt;p-value&lt;/font&gt; is calculated from a `\(t\)` distribution with `\(n-2\)` degrees of freedom
-
-.alert[
-`$$\text{p-value} = P(t \geq |\text{test statistic}|)$$`
-]
-
-&lt;img src="slr-coef-inf_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
-
----
-
-
-class: middle, center
-
-.instructions[
-**Write the general definition of the p-value for tests of `\(\beta_1\)`.**
-]
-
----
-
-### 4. State the conclusion 
-
-|  Magnitude of p-value |             Interpretation            |
-|:---------------------:|:-------------------------------------:|
-| p-value &lt; 0.01        | strong evidence against `\(H_0\)`         |
-| 0.01 &lt; p-value &lt; 0.05 | moderate evidence against `\(H_0\)`       |
-| 0.05 &lt; p-value &lt; 0.1  | weak evidence against `\(H_0\)`           |
-| p-value &gt; 0.1         | effectively no evidence against `\(H_0\)` |
-&lt;br&gt; 
-&lt;br&gt;
-
-**Notes:** 
-
-- These are general guidelines. The strength of evidence depends on the context of the problem.
-- Don't just rely on the reject/fail to reject conclusion from the hypothesis test to draw conclusions about the relationship between `\(x\)` and `\(y\)`. Use the EDA and confidence intervals to provide more context about the implications of your results.
-
----
-
-### Movie data: Hypothesis test for `\(\beta_1\)` 
-
-
-|term        | estimate| std.error| statistic| p.value|
-|:-----------|--------:|---------:|---------:|-------:|
-|(Intercept) |   32.316|     2.343|    13.795|       0|
-|critics     |    0.519|     0.035|    15.028|       0|
-
-.instructions[
-a. State the hypotheses in (1) words and (2) statistical notation.  
-
-b. What is the meaning of the test statistic in the context of the problem? 
-
-c. What is the meaning of the p-value in the context of the problem?
-
-d. State the conclusion in context of the problem.
-]
 
 
 

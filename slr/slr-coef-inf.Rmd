@@ -64,22 +64,34 @@ movie_scores <- fandango %>%
 
 ## Movie ratings data 
 
-The data set contains the "Tomatometer" score (**`critics`**) and audience score (**`audience`**) for 146 movies rated on rottentomatoes.com.
+The data set contains the "Tomatometer" score (.term[critics]) and audience score (.term[audience]) for 146 movies rated on rottentomatoes.com. 
 
 ```{r}
 ggplot(data = movie_scores, mapping = aes(x = critics, y = audience)) +
   geom_point(alpha = 0.5) + 
   labs(x = "Critics Score" , 
        y = "Audience Score") +
-  theme_bw()
+  theme_bw() +
+  theme(axis.title=element_text(size=14))
 ```
 
 
 ---
 
-## Movie ratings data 
+## The model
 
-We want to fit a line to describe the relationship between the critics score and audience score.
+$$\color{red}{\hat{\text{audience}} = 32.316 + 0.519 \times \text{critics}}$$
+
+```{r}
+model <- lm(audience ~ critics, data = movie_scores)
+```
+
+```{r}
+model %>%
+  tidy() %>%
+  kable(format = "html", digits = 3)
+```
+
 
 ```{r}
 ggplot(data = movie_scores, mapping = aes(x = critics, y = audience)) +
@@ -87,25 +99,228 @@ ggplot(data = movie_scores, mapping = aes(x = critics, y = audience)) +
   geom_smooth(method = "lm", color = "red", se = FALSE) +
   labs(x = "Critics Score" , 
        y = "Audience Score") +
-  theme_bw()
-```
-
-```{r}
-m <- lm(audience ~ critics,data=movie_scores)
+  theme_bw() +
+  theme(axis.title=element_text(size=14))
 ```
 
 ---
 
-### Questions of interest
+## Questions of interest
 
-In our example, we will treat the data as a random sample of movies from rottentomatoes.com
+--
 
-**Questions of interest**
-- What is a plausible range of values of the true population slope for `critics`? (<font class = "vocab">confidence interval</font>)
+Is there truly linear relationship between `critics` and `audience`, or is the relationshp we observed $(\hat{\beta}_1 = 0.519)$ due to random chance? 
 
-- Is there actually a linear relationship between `critics` and `audience`, or is the relationshp we observed due to random chance? 
-    - We estimated $\hat{\beta}_1 = 0.519$, but is there sufficient evidence to conclude that the true population slope $\beta$ is different from 0? (<font class = "vocab">hypothesis test</font>)
-    
+<br> 
+
+--
+
+What is a plausible range of values of $\beta$, the true population slope for `critics`? 
+
+---
+
+class: middle
+
+### Is there truly linear relationship between `critics` and `audience`, or is the relationshp we observed $(\hat{\beta}_1 = 0.519)$ due to random chance? 
+
+
+---
+
+## Outline of a hypothesis test
+
+`r emo::ji('one')` State the hypotheses.
+
+`r emo::ji('two')` Calculate the test statistic. 
+
+`r emo::ji('three')` Calculate the p-value.
+
+`r emo::ji('four')` State the conclusion. 
+
+---
+
+## `r emo::ji('one')` State the hypotheses
+
+```{r}
+model %>%
+  tidy() %>%
+  kable(format = "html", digits = 3)
+```
+
+<br>
+
+.pull-left[
+.small-box[
+$$\large{\begin{aligned}& H_0: \beta_1 = 0\\& H_a: \beta_1 \neq 0\end{aligned}}$$
+]
+]
+
+---
+
+## `r emo::ji('one')` State the hypotheses
+
+```{r}
+model %>%
+  tidy() %>%
+  kable(format = "html", digits = 3)
+```
+
+<br>
+
+.pull-left[
+.small-box[
+$$\large{\begin{aligned}& H_0: \beta_1 = 0\\& H_a: \beta_1 \neq 0\end{aligned}}$$
+]
+]
+
+.pull-right[
+<font color = "white">place-holder</font>
+
+.big[.vocab[Null hypothesis]]
+
+
+]
+
+---
+
+## `r emo::ji('one')` State the hypotheses
+
+```{r}
+model %>%
+  tidy() %>%
+  kable(format = "html", digits = 3)
+```
+
+<br>
+
+.pull-left[
+.small-box[
+$$\large{\begin{aligned}& H_0: \beta_1 = 0\\& H_a: \beta_1 \neq 0\end{aligned}}$$
+]
+]
+
+.pull-right[
+<font color = "white">place-holder</font>
+ 
+.big[.vocab[Null hypothesis]]
+
+.big[.vocab[Alternative hypothesis]]
+
+]
+
+---
+
+## `r emo::ji('two')` Calculate the test statistic
+
+```{r}
+model %>%
+  tidy() %>%
+  kable(format = "html", digits = 3)
+```
+
+<br> 
+
+.eq[
+$$\text{test statistic} = \frac{\text{Estimate} - \text{Hypothesized}}{\text{Standard error}}$$
+]
+
+---
+
+## `r emo::ji('two')` Calculate the test statistic
+
+```{r}
+model %>%
+  tidy() %>%
+  kable(format = "html", digits = 3) %>%
+  row_spec(2, background = "#dce5b2")
+```
+
+<br> 
+
+--
+
+.pull-left[
+.eq[
+$$t = \frac{{\hat{\beta}_1} - 0}{\text{SE}_{\hat{\beta}_1}}$$
+]
+]
+
+--
+
+.pull-right[
+
+.small-box-work[
+$$\begin{aligned}t &= \frac{0.5187 - 0}{0.0345}\\
+&= \mathbf{15.03}\end{aligned}$$
+]
+]
+
+---
+
+### 3. Calculate the p-value
+
+<font class="vocab">p-value</font> is calculated from a $t$ distribution with $n-2$ degrees of freedom
+
+.alert[
+$$\text{p-value} = P(t \geq |\text{test statistic}|)$$
+]
+
+```{r echo = F}
+ggplot(data.frame(x = c(-4, 4)), aes(x)) +
+  stat_function(fun = dt, args =list(df =144)) +
+  stat_function(fun = dt,   args =list(df =144),
+                xlim = c(-4, -1.5),
+                geom = "area", fill = "navy") + 
+    stat_function(fun = dt,   args =list(df =144),
+                xlim = c(1.5, 4),
+                geom = "area", fill = "navy")
+```
+
+---
+
+
+class: middle, center
+
+.instructions[
+**Write the general definition of the p-value for tests of $\beta_1$.**
+]
+
+---
+
+### 4. State the conclusion 
+
+|  Magnitude of p-value |             Interpretation            |
+|:---------------------:|:-------------------------------------:|
+| p-value < 0.01        | strong evidence against $H_0$         |
+| 0.01 < p-value < 0.05 | moderate evidence against $H_0$       |
+| 0.05 < p-value < 0.1  | weak evidence against $H_0$           |
+| p-value > 0.1         | effectively no evidence against $H_0$ |
+<br> 
+<br>
+
+**Notes:** 
+
+- These are general guidelines. The strength of evidence depends on the context of the problem.
+- Don't just rely on the reject/fail to reject conclusion from the hypothesis test to draw conclusions about the relationship between $x$ and $y$. Use the EDA and confidence intervals to provide more context about the implications of your results.
+
+---
+
+### Movie data: Hypothesis test for $\beta_1$ 
+
+```{r}
+model %>%
+  tidy() %>%
+  kable(format = "markdown", digits = 3)
+```
+
+.instructions[
+a. State the hypotheses in (1) words and (2) statistical notation.  
+
+b. What is the meaning of the test statistic in the context of the problem? 
+
+c. What is the meaning of the p-value in the context of the problem?
+
+d. State the conclusion in context of the problem.
+]
 ---
 
 class: middle, center
@@ -197,8 +412,8 @@ ggplot(data.frame(x = c(-4, 4)), aes(x)) +
 ```{r echo = F}
 n <- nrow(movie_scores)
 var.x <- var(movie_scores$critics)
-sigma <- glance(m)$sigma
-beta1 <- tidy(m)$estimate[2]
+sigma <- glance(model)$sigma
+beta1 <- tidy(model)$estimate[2]
 crit.val <- qt(0.975, n-2)
 summaries <- tibble(n = n, 
                     var.x = var.x,
@@ -217,7 +432,7 @@ Write the equation for the 95% confidence interval for $\beta_1$, the coefficien
 ### Interpretation 
 
 ```{r}
-m %>%
+model %>%
   tidy(conf.int=TRUE) %>%
   kable(format = "markdown", digits = 3)
 ```
@@ -226,122 +441,7 @@ m %>%
 Interpret the 95% confidence interval for $\beta_1$, the coefficient (slope) of critics.
 ]
 
----
 
-class: middle, center
-
-### Is there actually a linear relationship between `critics` and `audience`, or is the relationshp we observed due to random chance?
-
----
-
-### Recall: Outline of Hypothesis Test
-
-1. State the hypotheses
-
-2. Calculate the test statistic 
-
-3. Calculate the p-value
-
-4. State the conclusion in the context of the problem
-
----
-
-### 1. State the hypotheses
-
-- We are often interested in testing whether there is a statistically significant linear relationship between the predictor and response variables
-
-- If there is actually no linear relationship between the two variables, the population regression slope, $\beta_1$, would equal 0 
---
-
-- Therefore, let's test the hypotheses: 
-
-.alert[
-$$\begin{aligned}& H_0: \beta_1 = 0\\& H_a: \beta_1 \neq 0\end{aligned}$$
-]
-
-- These are the hypotheses corresponding to the output from the `lm` function
-
-
----
-
-### 2. Calculate the test statistic
-
-$$\begin{aligned}& H_0: \beta_1 = 0\\& H_a: \beta_1 \neq 0\end{aligned}$$
-
-
-.alert[
-**Test Statistic:**
-$$\begin{aligned}\text{test statistic} &= \frac{\text{Estimate} - \text{Hypothesized}}{SE} \\[10pt]
-&= \frac{\hat{\beta}_1 - 0}{SE(\hat{\beta}_1)}\end{aligned}$$
-]
-
----
-
-### 3. Calculate the p-value
-
-<font class="vocab">p-value</font> is calculated from a $t$ distribution with $n-2$ degrees of freedom
-
-.alert[
-$$\text{p-value} = P(t \geq |\text{test statistic}|)$$
-]
-
-```{r echo = F}
-ggplot(data.frame(x = c(-4, 4)), aes(x)) +
-  stat_function(fun = dt, args =list(df =144)) +
-  stat_function(fun = dt,   args =list(df =144),
-                xlim = c(-4, -1.5),
-                geom = "area", fill = "navy") + 
-    stat_function(fun = dt,   args =list(df =144),
-                xlim = c(1.5, 4),
-                geom = "area", fill = "navy")
-```
-
----
-
-
-class: middle, center
-
-.instructions[
-**Write the general definition of the p-value for tests of $\beta_1$.**
-]
-
----
-
-### 4. State the conclusion 
-
-|  Magnitude of p-value |             Interpretation            |
-|:---------------------:|:-------------------------------------:|
-| p-value < 0.01        | strong evidence against $H_0$         |
-| 0.01 < p-value < 0.05 | moderate evidence against $H_0$       |
-| 0.05 < p-value < 0.1  | weak evidence against $H_0$           |
-| p-value > 0.1         | effectively no evidence against $H_0$ |
-<br> 
-<br>
-
-**Notes:** 
-
-- These are general guidelines. The strength of evidence depends on the context of the problem.
-- Don't just rely on the reject/fail to reject conclusion from the hypothesis test to draw conclusions about the relationship between $x$ and $y$. Use the EDA and confidence intervals to provide more context about the implications of your results.
-
----
-
-### Movie data: Hypothesis test for $\beta_1$ 
-
-```{r}
-m %>%
-  tidy() %>%
-  kable(format = "markdown", digits = 3)
-```
-
-.instructions[
-a. State the hypotheses in (1) words and (2) statistical notation.  
-
-b. What is the meaning of the test statistic in the context of the problem? 
-
-c. What is the meaning of the p-value in the context of the problem?
-
-d. State the conclusion in context of the problem.
-]
 
 
 
