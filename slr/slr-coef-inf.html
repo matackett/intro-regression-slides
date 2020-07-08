@@ -31,11 +31,11 @@ class: title-slide
 
 --
 
+- Conduct a hypothesis test for `\(\beta_1\)`
 
-  
 --
 
-
+- Calculate a confidence interval for `\(\beta_1\)`
 
 
 
@@ -54,7 +54,7 @@ The data set contains the "Tomatometer" score (.term[critics]) and audience scor
 
 ## The model
 
-`$$\color{red}{\hat{\text{audience}} = 32.316 + 0.519 \times \text{critics}}$$`
+`$$\color{blue}{\hat{\text{audience}} = 32.316 + 0.519 \times \text{critics}}$$`
 
 
 
@@ -95,7 +95,7 @@ The data set contains the "Tomatometer" score (.term[critics]) and audience scor
 
 --
 
-Is there truly linear relationship between `critics` and `audience`, or is the relationshp we observed `\((\hat{\beta}_1 = 0.519)\)` due to random chance? 
+Is there truly linear relationship between `critics` and `audience`, or is the relationship we observed `\((\hat{\beta}_1 = 0.519)\)` due to random chance? 
 
 &lt;br&gt; 
 
@@ -293,9 +293,8 @@ class: middle
 
 &lt;br&gt; 
 
-.pull-left[
+.eq[
 `$$\text{test statistic} = \frac{\text{Estimate} - \text{Hypothesized}}{\text{Standard error}}$$`
-]
 ]
 
 ---
@@ -352,28 +351,83 @@ class: middle
 
 ---
 
-### 3. Calculate the p-value
+## 3️⃣ Calculate the p-value
 
-&lt;font class="vocab"&gt;p-value&lt;/font&gt; is calculated from a `\(t\)` distribution with `\(n-2\)` degrees of freedom
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; std.error &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 32.316 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.343 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13.795 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;background-color: #dce5b2 !important;"&gt; critics &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.519 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.035 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 15.028 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 
-.alert[
+&lt;br&gt; 
+
+.eq[
 `$$\text{p-value} = P(t \geq |\text{test statistic}|)$$`
 ]
 
-&lt;img src="slr-coef-inf_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
+Calculated from a `\(t\)` distribution with `\(n-2\)` degrees of freedom
 
 ---
 
+## 3️⃣ Calculate the p-value
 
-class: middle, center
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; std.error &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 32.316 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.343 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13.795 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;background-color: #dce5b2 !important;"&gt; critics &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.519 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.035 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 15.028 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 
-.instructions[
-**Write the general definition of the p-value for tests of `\(\beta_1\)`.**
-]
+&lt;br&gt; 
+
+&lt;img src="slr-coef-inf_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
-### 4. State the conclusion 
+## Understanding the p-value
 
 |  Magnitude of p-value |             Interpretation            |
 |:---------------------:|:-------------------------------------:|
@@ -381,147 +435,140 @@ class: middle, center
 | 0.01 &lt; p-value &lt; 0.05 | moderate evidence against `\(H_0\)`       |
 | 0.05 &lt; p-value &lt; 0.1  | weak evidence against `\(H_0\)`           |
 | p-value &gt; 0.1         | effectively no evidence against `\(H_0\)` |
+
 &lt;br&gt; 
 &lt;br&gt;
 
-**Notes:** 
-
-- These are general guidelines. The strength of evidence depends on the context of the problem.
-- Don't just rely on the reject/fail to reject conclusion from the hypothesis test to draw conclusions about the relationship between `\(x\)` and `\(y\)`. Use the EDA and confidence intervals to provide more context about the implications of your results.
+*These are general guidelines. The strength of evidence depends on the context of the problem.*
 
 ---
 
-### Movie data: Hypothesis test for `\(\beta_1\)` 
+## 4️⃣ State the conclusion
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; std.error &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 32.316 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.343 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13.795 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;background-color: #dce5b2 !important;"&gt; critics &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.519 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.035 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 15.028 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;br&gt; 
+
+.vocab[The data provide sufficient evidence that there is a linear relationship between the critics score and audience score for movies on rottentomatoes.com. ]
 
 
-|term        | estimate| std.error| statistic| p.value|
-|:-----------|--------:|---------:|---------:|-------:|
-|(Intercept) |   32.316|     2.343|    13.795|       0|
-|critics     |    0.519|     0.035|    15.028|       0|
-
-.instructions[
-a. State the hypotheses in (1) words and (2) statistical notation.  
-
-b. What is the meaning of the test statistic in the context of the problem? 
-
-c. What is the meaning of the p-value in the context of the problem?
-
-d. State the conclusion in context of the problem.
-]
 ---
 
 class: middle, center
 
-### What is a plausible range of values of the true population slope for `critics`?
+### What is a plausible range of values of `\(\beta_1\)`, the true population slope for `critics` (?
 
 ---
 
-### General form of the confidence interval
+## Confidence interval
 
-- Let &lt;font class="vocab"&gt;SE&lt;/font&gt; be the standard error of the statistic used to estimate the parameter of interest, then the general form of the confidence interval is
 
-.alert[
+.middle[
+.eq[
 `$$\text{ Estimate} \pm \text{ (critical value) } \times \text{SE}$$`
 ]
-- *Note*: The critical value is determined by the distribution of the estimate (statistic) and the confidence level
-
-- For the regression slope: 
-    - `\(\hat{\beta}_1\)` is the statistic used to estimate the parameter, `\(\beta_1\)` 
-    - We will write the confidence interval as 
-    `$$\mathbf{\hat{\beta}_1 \pm t^* SE(\hat{\beta}_1)}$$`
-    
----
-
-### Confidence interval for `\(\beta_1\)`
-
-- The confidence interval for the regression slope is 
-
-.alert[
-`$$\mathbf{\hat{\beta}_1 \pm t^* SE(\hat{\beta}_1)}$$`
 ]
 
-- `\(t^*\)` is the critical value associated with the confidence level.
-  + It is calculated from a `\(t\)` distribution with `\(n-2\)` degrees of freedom
+---
+
+## Confidence interval for `\(\beta_1\)`
+
+.middle[
+.eq[
+`$$\large{\hat{\beta}_1 \pm t^* \times SE_{\hat{\beta}_1}}$$`
+]
+]
+
+`\(t^*\)` is calculated from a `\(t\)` distribution with `\(n-2\)` degrees of freedom
   
-- `\(SE(\hat{\beta}_1)\)` is the standard error for the slope 
-
-`$$SE(\hat{\beta}_1) = \sqrt{\frac{\hat{\sigma}^2}{\sum\limits_{i=1}^n (x_i - \bar{x})^2}} \hspace{2.5mm} = \hspace{2.5mm} \hat{\sigma}\sqrt{\frac{1}{(n-1)s_X^2}}$$`
-
 ---
 
-### What is `\(\hat{\sigma}\)`?
+## Calculating the 95% CI for `\(\beta_1\)`
 
-- Recall, the residual is the difference between the observed response the predicted response (the estimated mean) 
-    - The residual for the ith observation, `\((x_i, y_i)\)`, is
-    
-    `$$e_i = y_i - (\hat{\beta}_0 + \hat{\beta}_1 x_i)$$` 
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; std.error &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 32.316 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.343 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13.795 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;background-color: #dce5b2 !important;"&gt; critics &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.519 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.035 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 15.028 &lt;/td&gt;
+   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 
-- The &lt;font class = "vocab"&gt;Residual Standard Error&lt;/font&gt; is the estimate of variation about the regression line
-    - Also known as the **Root Mean Square Error (RMSE)**
+`$$\hat{\beta_1} = 0.519 \hspace{15mm} t^* = 1.977 \hspace{15mm} SE_{\hat{\beta}_1} = 0.035$$`
 
-.alert[
-`$$\hat{\sigma} = \sqrt{\frac{1}{n-2}\sum\limits_{i=1}^{n} e_i^2}$$`
-]
----
-
-### Why *t*? 
-
-.alert[
-`$$\hat{\beta}_1 \sim N \Bigg(\beta_1, \sigma\sqrt{\frac{1}{(n-1)s_X^2}} \Bigg)$$`
-]
-
-- We don't know `\(\sigma\)`, so we use its estimate `\(\hat{\sigma}\)` in our calculations. Therefore, we use the *t* distribution when we calculate the confidence interval (and conduct hypothesis tests) to account for the extra variability that's been introduced (same reason we use *t* when doing inference for a mean)
-
-- The critical value `\(t^*\)` is calculated from the *t(n-2)* distribution - the *t* distribution with *n-2* degrees of freedom.
-
----
-
-### Movies data: Critical value
-
-
-```
-## [1] 1.976575
-```
-
-&lt;img src="slr-coef-inf_files/figure-html/unnamed-chunk-14-1.png" style="display: block; margin: auto;" /&gt;
-
----
-### Calculating the 95% CI for `\(\beta_1\)`
-
-
-|   n|   var.x|  sigma| beta1| crit.val|
-|---:|-------:|------:|-----:|--------:|
-| 146| 910.156| 12.538| 0.519|    1.977|
-
-.instructions[
-Write the equation for the 95% confidence interval for `\(\beta_1\)`, the coefficient (slope) of `critics`. 
+.eq[
+`$$0.519 \pm 1.977 \times 0.035 \\[8pt]
+\mathbf{[0.450, 0.588]}$$`
 ]
 
 ---
 
-### Interpretation 
+## Interpretation 
 
-
-|term        | estimate| std.error| statistic| p.value| conf.low| conf.high|
-|:-----------|--------:|---------:|---------:|-------:|--------:|---------:|
-|(Intercept) |   32.316|     2.343|    13.795|       0|   27.685|    36.946|
-|critics     |    0.519|     0.035|    15.028|       0|    0.450|     0.587|
-
-.instructions[
-Interpret the 95% confidence interval for `\(\beta_1\)`, the coefficient (slope) of critics.
+.eq[
+`$$\mathbf{[0.450, 0.588]}$$`
 ]
 
+&lt;br&gt;
 
-
-
+.vocab[We are 95% confident that for every one percent increase in the critics score, the audience score is predicted to increase between 0.450% and 0.588%.]
 
 ---
 
 ## Recap
---
-
 
 --
+
+- Conducted a hypothesis test for `\(\beta_1\)`
+
+--
+
+- Calculated a confidence interval for `\(\beta_1\)`
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
