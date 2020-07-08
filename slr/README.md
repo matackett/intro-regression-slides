@@ -8,5 +8,6 @@
 | Inference for regression | [HTML](https://matackett.github.io/intro-regression-slides/slr/slr-coef-inf.html#1)  | [PDF](https://matackett.github.io/intro-regression-slides/slr/slr-coef-inf.pdf) |
 | Prediction | [HTML](https://matackett.github.io/intro-regression-slides/slr/slr-prediction.html#1)  | [PDF](https://matackett.github.io/intro-regression-slides/slr/slr-prediction.pdf) |
 | Partitioning variability | [HTML](https://matackett.github.io/intro-regression-slides/slr/slr-partition-var.html#1)  | [PDF](https://matackett.github.io/intro-regression-slides/slr/slr-partition-var.pdf) |
+| ANOVA | [HTML](https://matackett.github.io/intro-regression-slides/slr/slr-anova.html#1)  | [PDF](https://matackett.github.io/intro-regression-slides/slr/slr-anova.pdf) |
 
 
