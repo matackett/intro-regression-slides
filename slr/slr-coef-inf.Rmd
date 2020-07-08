@@ -240,7 +240,7 @@ model %>%
 
 .pull-left[
 .eq[
-$$t = \frac{{\hat{\beta}_1} - 0}{\text{SE}_{\hat{\beta}_1}}$$
+$$t = \frac{{\hat{\beta}_1} - 0}{SE_{\hat{\beta}_1}}$$
 ]
 ]
 
@@ -373,7 +373,7 @@ model %>%
   row_spec(2, background = "#dce5b2")
 ```
 
-$$\hat{\beta_1} = 0.519 \hspace{15mm} t^* = 1.977 \hspace{15mm} SE_{\hat{\beta}_1} = 0.035$$
+$$\hat{\beta}_1 = 0.519 \hspace{15mm} t^* = 1.977 \hspace{15mm} SE_{\hat{\beta}_1} = 0.035$$
 
 .eq[
 $$0.519 \pm 1.977 \times 0.035 \\[8pt]
