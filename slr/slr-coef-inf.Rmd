@@ -394,6 +394,26 @@ $$\mathbf{[0.450, 0.588]}$$
 
 ---
 
+## Distribution of $\hat{\beta}_1$
+
+.eq[
+$$\hat{\beta}_1 \sim N \Bigg(\beta_1, \sigma\sqrt{\frac{1}{(n-1)s_X^2}} \Bigg)$$
+]
+
+---
+
+## $SE_{\hat{\beta}_1}$
+
+.eq[
+$$SE_{\hat{\beta}_1} = \sqrt{\frac{\hat{\sigma}^2}{\sum\limits_{i=1}^n (x_i - \bar{x})^2}} \hspace{2.5mm} = \hspace{2.5mm} \hat{\sigma}\sqrt{\frac{1}{(n-1)s_X^2}}$$
+]
+
+--
+
+$$\hat{\sigma} = \sqrt{\frac{1}{n-2}\sum\limits_{i=1}^{n} e_i^2}$$
+
+---
+
 ## Recap
 
 --
