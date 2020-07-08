@@ -1,0 +1,131 @@
+---
+title: "Simple Linear Regression"
+subtitle: "Foundation"
+author: "Dr. Maria Tackett"
+output:
+  xaringan::moon_reader:
+    mathjax: "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"
+    css: "slides.css"
+    logo: "img/introregression-sticker.png"
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: 4:3
+      slideNumberFormat: "%current%"
+    seal: false #make custom title slide
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r child = "setup.Rmd"}
+```
+
+class: title-slide 
+
+<br><br>
+
+# Simple Linear Regression 
+## Foundation
+
+<br><br><br>
+
+### Dr. Maria Tackett
+
+---
+
+## Topics 
+
+--
+
+
+  
+--
+
+
+
+```{r packages, echo = F}
+library(tidyverse)
+library(broom)
+library(knitr)
+library(kableExtra)
+library(patchwork)
+library(fivethirtyeight)
+```
+
+```{r data}
+movie_scores <- fandango %>%
+  rename(critics = rottentomatoes, 
+         audience = rottentomatoes_user)
+```
+
+---
+
+## General form of model
+
+.alert[
+$$Y = f(X) + \epsilon$$
+]
+
+$Y$: response variable
+
+--
+
+$X$: predictor variables
+
+--
+
+$f$: fixed but unknown function
+
+--
+
+$\epsilon$: random error
+   
+---
+
+## In simple linear regression
+
+.eq[
+$$\begin{aligned} Y &= \color{purple}{\textbf{Model}} + \text{Error} \\[8pt]
+&= \color{purple}{f(X)} + \epsilon \\[8pt]
+&= \color{purple}{\mu_{Y|X}} + \epsilon \\[8pt]
+&= \color{purple}{\beta_0 + \beta_1 X} + \epsilon \end{aligned} $$
+]
+
+---
+
+## Regression Model 
+
+$$Y|X \sim N(\beta_0 + \beta_1 X,\sigma^2)$$
+
+```{r, echo=FALSE,out.width = '80%',fig.align='center'}
+knitr::include_graphics("img/regression.png")
+```
+
+$\sigma$: the standard deviation of $Y$ as a function of $X$ 
+
+---
+
+### Regression Model
+
+.alert[
+$$Y|X \sim N(\beta_0 + \beta_1 X, \sigma^2)$$
+]
+
+--
+
+- For a single observation $(x_i, y_i)$
+
+$$y_i = \beta_0 + \beta_1 x_i + \epsilon_i \hspace{10mm} \epsilon_i \sim N(0,\sigma^2)$$
+<br><br>
+
+---
+
+## Recap
+--
+
+
+--
+
+
