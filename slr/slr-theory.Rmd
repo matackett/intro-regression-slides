@@ -22,6 +22,7 @@ editor_options:
 ```{r child = "setup.Rmd"}
 ```
 
+<!--
 class: title-slide 
 
 <br><br>
@@ -456,4 +457,5 @@ Interpret the 95% confidence interval for $\beta_1$, the coefficient (slope) of 
 
 --
 
+-->
 
