@@ -241,7 +241,7 @@ model %>%
 
 .pull-left[
 .eq[
-$$t = \frac{{\hat{\beta}_1} - 0}{\text{SE}_{\hat{\beta}_1}}$$
+$$t = \frac{\hat{\beta}_1 - 0}{\text{SE}_{\hat{\beta}_1}}$$
 ]
 ]
 
