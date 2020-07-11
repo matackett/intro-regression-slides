@@ -1,6 +1,6 @@
-# Simple linear regression unit
+# Simple linear regression 
 
-| Unit  | Slides |     |
+| Topic  | Slides |     |
 |-------|:------:|:---:|
 | Intro | [HTML](https://matackett.github.io/intro-regression-slides/slr/slr-intro.html#1)  | [PDF](https://matackett.github.io/intro-regression-slides/slr/slr-intro.pdf) |
 | Foundation | [HTML](https://matackett.github.io/intro-regression-slides/slr/slr-foundation.html#1)  | [PDF](https://matackett.github.io/intro-regression-slides/slr/slr-foundation.pdf) |
