@@ -28,11 +28,19 @@ class: title-slide
 
 ## Topics 
 
+--
+
 - Use analysis of variance to partition variability in the response variable 
+
+--
 
 - Define and calculate `\(R^2\)`
 
-- Use ANOVA to test the hypothesis `\(H_0: \beta_1 = 0\)`
+--
+
+- Use ANOVA to test the hypothesis
+
+`$$H_0: \beta_1 = 0 \text{ vs }H_a: \beta_1 \neq 0$$`
 
 --
 
@@ -49,47 +57,9 @@ The data set contains the **heart weight** (.term[Hwt]) and **body weight** (.te
 
 ---
 
-## The model
-
-.eq[
-`$$\hat{\text{Hwt}} = -0.357 + 4.034 \times \text{Bwt}$$`
-]
-
-&lt;br&gt;
-
-&lt;table&gt;
- &lt;thead&gt;
-  &lt;tr&gt;
-   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; std.error &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
-  &lt;/tr&gt;
- &lt;/thead&gt;
-&lt;tbody&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -0.357 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.692 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -0.515 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.607 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Bwt &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 4.034 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.250 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 16.119 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
----
-
 ## Distribution of response
 
-&lt;img src="slr-partition-var_files/figure-html/unnamed-chunk-4-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="slr-partition-var_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
 
 
 &lt;table&gt;
@@ -111,10 +81,22 @@ The data set contains the **heart weight** (.term[Hwt]) and **body weight** (.te
 
 ---
 
+## The model
+
+
+
+.eq[
+`$$\hat{\text{Hwt}} = -0.357 + 4.034 \times \text{Bwt}$$`
+]
+
+
+&lt;img src="slr-partition-var_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
+---
+
 class: middle, center
 
 .alert[
-How much of the variability in cats' heart weights can be explained by knowing their body weights?
+How much of the variation in cats' heart weights can be explained by knowing their body weights?
 ]
 
 ---
@@ -130,15 +112,15 @@ We will use .vocab[Analysis of Variance (ANOVA)] to partition the variation in t
 
 ---
 
-## Response variable, `\(Y\)`, 
+## Response variable, `\(Y\)`
 
-&lt;img src="slr-partition-var_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="slr-partition-var_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
 ## Total variation 
 
-&lt;img src="slr-partition-var_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="slr-partition-var_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
 
 
 `$$\large{SS_{Total} = \sum_{i=1}^n(y_i - \bar{y})^2 = (n-1)s_y^2}$$`
@@ -147,7 +129,7 @@ We will use .vocab[Analysis of Variance (ANOVA)] to partition the variation in t
 
 ## Explained variation (Model)
 
-&lt;img src="slr-partition-var_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="slr-partition-var_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" /&gt;
 
 `$$\large{SS_{Model} = \sum_{i = 1}^{n}(\hat{y}_i - \bar{y})^2}$$`
 
@@ -155,7 +137,7 @@ We will use .vocab[Analysis of Variance (ANOVA)] to partition the variation in t
 
 ## Unexplained variation (Residuals)
 
-&lt;img src="slr-partition-var_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="slr-partition-var_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
 
 
 `$$\large{SS_{Error} = \sum_{i = 1}^{n}(y_i - \hat{y}_i)^2}$$`
@@ -231,7 +213,7 @@ The .vocab[coefficient of determination], &lt;font class = "vocab"&gt;R&lt;sup&g
 
 ---
 
-## ANOVA 
+## ANOVA table
 
 &lt;table&gt;
  &lt;thead&gt;
@@ -274,7 +256,7 @@ The .vocab[coefficient of determination], &lt;font class = "vocab"&gt;R&lt;sup&g
 
 ---
 
-## ANOVA 
+## ANOVA table
 
 &lt;table&gt;
  &lt;thead&gt;
@@ -319,15 +301,15 @@ The .vocab[coefficient of determination], &lt;font class = "vocab"&gt;R&lt;sup&g
 
 .vocab[Sum of squares]
 
-`\(SS_{Total} = 847.625\)`
+`\(SS_{Total} = 847.625 = 548.092 + 299.533\)`
 
 `\(SS_{Model} = 548.092\)`
 
-`\(SS_{Error} = 847.625 - 548.092 = 299.533\)`
+`\(SS_{Error} = 299.533\)`
 
 ---
 
-## ANOVA
+## ANOVA Test
 
 &lt;table&gt;
  &lt;thead&gt;
@@ -379,7 +361,7 @@ The .vocab[coefficient of determination], &lt;font class = "vocab"&gt;R&lt;sup&g
 
 ---
 
-## ANOVA
+## ANOVA Test
 
 &lt;table&gt;
  &lt;thead&gt;
@@ -432,7 +414,7 @@ The .vocab[coefficient of determination], &lt;font class = "vocab"&gt;R&lt;sup&g
 
 ---
 
-## ANOVA 
+## ANOVA Test
 
 &lt;table&gt;
  &lt;thead&gt;
@@ -483,7 +465,7 @@ The .vocab[coefficient of determination], &lt;font class = "vocab"&gt;R&lt;sup&g
 
 ---
 
-## ANOVA 
+## ANOVA Test
 
 &lt;table&gt;
  &lt;thead&gt;
@@ -528,14 +510,7 @@ The .vocab[coefficient of determination], &lt;font class = "vocab"&gt;R&lt;sup&g
 
 .vocab[F test statistic]: ratio of explained to unexplained variability
 
-`\(F_{(1,142)} = \frac{MS_{Model}}{MS_{Residuals}}= \frac{548.092}{2.109} = 259.835\)`
-
----
-
-## F distribution 
-
-&lt;img src="slr-partition-var_files/figure-html/unnamed-chunk-18-1.png" style="display: block; margin: auto;" /&gt;
-
+`\(F = \frac{MS_{Model}}{MS_{Error}}= \frac{548.092}{2.109} = 259.835\)`
 
 ---
 
@@ -545,7 +520,7 @@ The .vocab[coefficient of determination], &lt;font class = "vocab"&gt;R&lt;sup&g
 
 ---
 
-## ANOVA 
+## ANOVA test
 
 &lt;table&gt;
  &lt;thead&gt;
@@ -588,7 +563,18 @@ The .vocab[coefficient of determination], &lt;font class = "vocab"&gt;R&lt;sup&g
 
 --
 
-.vocab[P-value]: Probability of observing a test statistic at least as extreme as *F Stat* given the true slope parameter is 0, i.e. `\(H_0: \beta_1 = 0\)` 
+.vocab[P-value]: Probability of observing a test statistic at least as extreme as *F Stat* given the population slope `\(\beta_1\)` is 0
+
+--
+
+The p-value is calculated using an `\(F\)` distribution with 1 and `\(n-2\)` degrees of freedom
+
+---
+
+## Calculating p-value
+
+&lt;img src="slr-partition-var_files/figure-html/unnamed-chunk-21-1.png" style="display: block; margin: auto;" /&gt;
+
 
 ---
 
@@ -637,7 +623,7 @@ The p-value is very small `\((\approx 0)\)`, so we reject `\(H_0\)`.
 
 --
 
-The data provide strong evidence that the true slope parameter, `\(\beta_1\)`, is different from 0. 
+The data provide strong evidence that population slope, `\(\beta_1\)`, is different from 0. 
 
 --
 
@@ -647,11 +633,18 @@ The data provide strong evidence that the true slope parameter, `\(\beta_1\)`, i
 
 ## Recap
 
+--
+
 - Used analysis of variance to partition variability in the response variable 
+
+--
 
 - Defined and calculated `\(R^2\)`
 
-- Used ANOVA to test the hypothesis `\(H_0: \beta_1 = 0\)`
+--
+
+- Used ANOVA to test the hypothesis 
+`$$H_0: \beta_1 = 0 \text{ vs }H_a: \beta_1 \neq 0$$`
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

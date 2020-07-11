@@ -36,11 +36,19 @@ class: title-slide
 
 ## Topics 
 
+--
+
 - Use analysis of variance to partition variability in the response variable 
+
+--
 
 - Define and calculate $R^2$
 
-- Use ANOVA to test the hypothesis $H_0: \beta_1 = 0$
+--
+
+- Use ANOVA to test the hypothesis
+
+$$H_0: \beta_1 = 0 \text{ vs }H_a: \beta_1 \neq 0$$
 
 --
 
@@ -72,23 +80,6 @@ ggplot(data = cats, aes(x = Bwt, y = Hwt)) +
 
 ---
 
-## The model
-
-.eq[
-$$\hat{\text{Hwt}} = -0.357 + 4.034 \times \text{Bwt}$$
-]
-
-<br>
-
-```{r echo = F}
-bwt_hwt_model <- lm(Hwt ~ Bwt, data = cats)
-bwt_hwt_model %>%
-  tidy() %>%
-  kable(format = "html", digits = 3)
-```
-
----
-
 ## Distribution of response
 
 ```{r fig.height = 3}
@@ -109,10 +100,32 @@ cats %>%
 
 ---
 
+## The model
+
+```{r}
+bwt_hwt_model <- lm(Hwt ~ Bwt, data = cats)
+```
+
+.eq[
+$$\hat{\text{Hwt}} = -0.357 + 4.034 \times \text{Bwt}$$
+]
+
+
+```{r echo = F}
+ggplot(data = cats, aes(x = Bwt, y = Hwt)) +
+  geom_point(alpha = 0.7) + 
+  geom_smooth(method = "lm", color = "red", se = FALSE) +
+  labs(x = "Body Weight (kg)",
+       y = "Heart Weight (g)") +
+  theme_bw() +
+  theme(axis.title=element_text(size=14))
+```
+---
+
 class: middle, center
 
 .alert[
-How much of the variability in cats' heart weights can be explained by knowing their body weights?
+How much of the variation in cats' heart weights can be explained by knowing their body weights?
 ]
 
 ---
@@ -130,7 +143,7 @@ include_graphics("img/model-anova.png")
 
 ---
 
-## Response variable, $Y$, 
+## Response variable, $Y$
 
 ```{r fig.height = 3}
 mean_y <- mean(cats$Hwt)
@@ -141,6 +154,7 @@ ggplot(data = cats, aes(x = Bwt, y = Hwt)) +
   labs(x = "Body Weight (kg)",
        y = "Heart Weight (g)") +
   theme_light() +
+  annotate("text", x = 4, y = 9.7, label = latex2exp::TeX("$\\bar{y}$"), color = "blue", size = 6) + 
   theme(axis.title=element_text(size=14))
 ```
 
@@ -157,6 +171,7 @@ ggplot(data = cats, aes(x = Bwt, y = Hwt)) +
   geom_segment(aes(x=Bwt, xend=Bwt, y=Hwt, yend=mean_y), color = "black", size = 1) +
   labs(x = "Body Weight (kg)",
        y = "Heart Weight (g)") +
+  annotate("text", x = 4, y = 9.7, label = latex2exp::TeX("$\\bar{y}$"), color = "blue", size = 6) +
   theme_light() +
   theme(axis.title=element_text(size=14))
 ```
@@ -174,8 +189,10 @@ ggplot(data = cats, aes(x = Bwt, y = Hwt)) +
   geom_smooth(method = "lm", se = FALSE, color = "red") +
   geom_hline(yintercept = mean_y, color = "blue") +
   geom_segment(aes(x=Bwt, xend=Bwt, y = mean_y, yend=predict(bwt_hwt_model)), color = "black", size = 1) +
-  labs(x = "",
-       y = "") +
+  labs(x = "Body Weight (kg)",
+       y = "Heart Weight (g)")  +
+  annotate("text", x = 4, y = 9.7, label = latex2exp::TeX("$\\bar{y}$"), color = "blue", size = 6) +
+  annotate("text", x = 4, y = 16, label = latex2exp::TeX("$\\hat{\\mu}_y$"), color = "red", size = 6) +
   theme_light() +
   theme(axis.title=element_text(size=14))
 ```
@@ -194,6 +211,8 @@ ggplot(data = cats, aes(x = Bwt, y = Hwt)) +
   geom_segment(aes(x=Bwt, xend=Bwt, y = Hwt, yend=predict(bwt_hwt_model)), color = "black") +
   labs(x = "Body Weight (kg)",
        y = "Heart Weight (g)") +
+  annotate("text", x = 4, y = 9.7, label = latex2exp::TeX("$\\bar{y}$"), color = "blue", size = 6) +
+annotate("text", x = 4, y = 16, label = latex2exp::TeX("$\\hat{\\mu}_y$"), color = "red", size = 6)   +
   theme_light() +
   theme(axis.title=element_text(size=14))
 ```
@@ -279,7 +298,7 @@ $$\begin{aligned}R^2 &= \frac{548.092}{847.625} \\[10pt]
 
 ---
 
-## ANOVA 
+## ANOVA table
 
 ```{r}
 cats_anova <- anova(bwt_hwt_model) %>%
@@ -307,7 +326,7 @@ cats_anova %>%
 
 ---
 
-## ANOVA 
+## ANOVA table
 
 ```{r}
 cats_anova %>%
@@ -319,15 +338,15 @@ cats_anova %>%
 
 .vocab[Sum of squares]
 
-$SS_{Total} = 847.625$
+$SS_{Total} = 847.625 = 548.092 + 299.533$
 
 $SS_{Model} = 548.092$
 
-$SS_{Error} = 847.625 - 548.092 = 299.533$
+$SS_{Error} = 299.533$
 
 ---
 
-## ANOVA
+## ANOVA Test
 
 ```{r}
 cats_anova %>%
@@ -345,7 +364,7 @@ $$\large{\begin{align}&H_0: \beta_1 = 0 \\
 
 ---
 
-## ANOVA
+## ANOVA Test
 
 ```{r}
 cats_anova %>%
@@ -365,7 +384,7 @@ $df_{Error} = 143 - 1 = 142$
 
 ---
 
-## ANOVA 
+## ANOVA Test
 
 ```{r}
 cats_anova %>%
@@ -383,7 +402,7 @@ $MS_{Error} = \frac{299.533}{142} = 2.109$
 
 ---
 
-## ANOVA 
+## ANOVA Test
 
 ```{r}
 cats_anova %>%
@@ -395,7 +414,7 @@ cats_anova %>%
 
 .vocab[F test statistic]: ratio of explained to unexplained variability
 
-$F_{(1,142)} = \frac{MS_{Model}}{MS_{Residuals}}= \frac{548.092}{2.109} = 259.835$
+$F = \frac{MS_{Model}}{MS_{Error}}= \frac{548.092}{2.109} = 259.835$
 
 ---
 
@@ -414,10 +433,27 @@ ggplot() +
   
 ```
 
+---
+
+## ANOVA test
+
+```{r}
+cats_anova %>%
+  kable(format = "html", digits = 3) %>%
+  column_spec(6, background = "#dce5b2", include_thead = T)
+```
+
+--
+
+.vocab[P-value]: Probability of observing a test statistic at least as extreme as *F Stat* given the population slope $\beta_1$ is 0
+
+--
+
+The p-value is calculated using an $F$ distribution with 1 and $n-2$ degrees of freedom
 
 ---
 
-## F distribution 
+## Calculating p-value
 
 ```{r fig.height = 4}
 ggplot() +
@@ -436,19 +472,6 @@ ggplot() +
   
 ```
 
----
-
-## ANOVA 
-
-```{r}
-cats_anova %>%
-  kable(format = "html", digits = 3) %>%
-  column_spec(6, background = "#dce5b2", include_thead = T)
-```
-
---
-
-.vocab[P-value]: Probability of observing a test statistic at least as extreme as *F Stat* given the true slope parameter is 0, i.e. $H_0: \beta_1 = 0$ 
 
 ---
 
@@ -464,7 +487,7 @@ The p-value is very small $(\approx 0)$, so we reject $H_0$.
 
 --
 
-The data provide strong evidence that the true slope parameter, $\beta_1$, is different from 0. 
+The data provide strong evidence that population slope, $\beta_1$, is different from 0. 
 
 --
 
@@ -474,10 +497,17 @@ The data provide strong evidence that the true slope parameter, $\beta_1$, is di
 
 ## Recap
 
+--
+
 - Used analysis of variance to partition variability in the response variable 
+
+--
 
 - Defined and calculated $R^2$
 
-- Used ANOVA to test the hypothesis $H_0: \beta_1 = 0$
+--
+
+- Used ANOVA to test the hypothesis 
+$$H_0: \beta_1 = 0 \text{ vs }H_a: \beta_1 \neq 0$$
 
 
