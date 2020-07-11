@@ -26,21 +26,9 @@ class: title-slide
 
 ---
 
-## Topics 
-
---
-
-
-  
---
 
 
 
-
-
-
-
----
 
 ## General form of model
 
@@ -64,51 +52,61 @@ class: title-slide
    
 ---
 
-## In simple linear regression
+## Simple linear regression
 
 .eq[
-`$$\begin{aligned} Y &amp;= \color{purple}{\textbf{Model}} + \text{Error} \\[8pt]
+`$$\begin{aligned}Y &amp;= \color{purple}{\textbf{Model}} + \text{Error} \\[8pt]
 &amp;= \color{purple}{f(X)} + \epsilon \\[8pt]
 &amp;= \color{purple}{\mu_{Y|X}} + \epsilon \\[8pt]
-&amp;= \color{purple}{\beta_0 + \beta_1 X} + \epsilon \end{aligned} $$
+&amp;= \color{purple}{\beta_0 + \beta_1 X} + \epsilon \end{aligned}$$`
 ]
 
 ---
 
-## Regression Model 
+class: middle
 
-`$$Y|X \sim N(\beta_0 + \beta_1 X,\sigma^2)$$`
+.eq[
+`$$Y = \beta_0 + \beta_1 X + \epsilon$$`
+]
 
-&lt;img src="img/regression.png" width="80%" style="display: block; margin: auto;" /&gt;
-
-`\(\sigma\)`: the standard deviation of `\(Y\)` as a function of `\(X\)` 
+where the errors are independent and normally distribution, `\(\epsilon \sim N(0, \sigma_\epsilon)\)`
 
 ---
 
-## Regression Model 
+class: middle
+
+`$$Y|X \sim N(\beta_0 + \beta_1 X, \sigma_\epsilon^2)$$`
+
+
+&lt;img src="slr-foundation_files/figure-html/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: middle
+
+`$$Y|X \sim N(\beta_0 + \beta_1 X, \sigma_\epsilon^2)$$`
+
 
 &lt;img src="slr-foundation_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
 
-### Regression Model
+---
 
-.alert[
-`$$Y|X \sim N(\beta_0 + \beta_1 X, \sigma^2)$$`
-]
+class: middle
 
---
+`$$Y|X \sim N(\beta_0 + \beta_1 X, \sigma_\epsilon^2)$$`
 
-- For a single observation `\((x_i, y_i)\)`
 
-`$$y_i = \beta_0 + \beta_1 x_i + \epsilon_i \hspace{10mm} \epsilon_i \sim N(0,\sigma^2)$$`
-&lt;br&gt;&lt;br&gt;
+&lt;img src="slr-foundation_files/figure-html/unnamed-chunk-4-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
-## Recap
---
+## Regression standard error 
 
+Once we fit the model, we can use the residuals to estimate the regression standard error, `\(\hat{\sigma}_\epsilon\)`
 
---
+.alert[
+`$$\hat{\sigma}_\epsilon = \sqrt{\frac{\sum_\limits{i=1}^n(y_i - \hat{y}_i)^2}{n-2}} = \sqrt{\frac{\sum_\limits{i=1}^ne_i^2}{n-2}}$$`
+]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

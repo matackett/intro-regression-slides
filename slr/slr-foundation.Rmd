@@ -35,14 +35,6 @@ class: title-slide
 
 ---
 
-## Topics 
-
---
-
-
-  
---
-
 
 
 ```{r packages, echo = F}
@@ -53,14 +45,6 @@ library(kableExtra)
 library(patchwork)
 library(fivethirtyeight)
 ```
-
-```{r data}
-movie_scores <- fandango %>%
-  rename(critics = rottentomatoes, 
-         audience = rottentomatoes_user)
-```
-
----
 
 ## General form of model
 
@@ -84,85 +68,211 @@ $\epsilon$: random error
    
 ---
 
-## In simple linear regression
+## Simple linear regression
 
 .eq[
-$$\begin{aligned} Y &= \color{purple}{\textbf{Model}} + \text{Error} \\[8pt]
+$$\begin{aligned}Y &= \color{purple}{\textbf{Model}} + \text{Error} \\[8pt]
 &= \color{purple}{f(X)} + \epsilon \\[8pt]
 &= \color{purple}{\mu_{Y|X}} + \epsilon \\[8pt]
-&= \color{purple}{\beta_0 + \beta_1 X} + \epsilon \end{aligned} $$
+&= \color{purple}{\beta_0 + \beta_1 X} + \epsilon \end{aligned}$$
 ]
 
 ---
 
-## Regression Model 
+class: middle
 
-$$Y|X \sim N(\beta_0 + \beta_1 X,\sigma^2)$$
+.eq[
+$$Y = \beta_0 + \beta_1 X + \epsilon$$
+]
 
-```{r, echo=FALSE,out.width = '80%',fig.align='center'}
-knitr::include_graphics("img/regression.png")
-```
-
-$\sigma$: the standard deviation of $Y$ as a function of $X$ 
+where the errors are independent and normally distribution, $\epsilon \sim N(0, \sigma_\epsilon)$
 
 ---
 
-## Regression Model 
+class: middle
 
-```{r}
-##   Code from https://stackoverflow.com/questions/31794876/ggplot2-how-to-curve-small-gaussian-densities-on-a-regression-line?rq=1
+$$Y|X \sim N(\beta_0 + \beta_1 X, \sigma_\epsilon^2)$$
 
-## pulled from broadening your statistical horizons
+
+```{r fig.height = 3.5}
+##   Code modified from https://stackoverflow.com/questions/31794876/ggplot2-how-to-curve-small-gaussian-densities-on-a-regression-line?rq=1
+
+## Modified based on BYSH: https://bookdown.org/roback/bookdown-bysh/ch-MLRreview.html#ordinary-least-squares-ols-assumptions
+
 set.seed(0)
 dat <- data.frame(x=(x=runif(10000, 0, 50)),
                   y=rnorm(10000, 10*x, 100))
+
 ## breaks: where you want to compute densities
 breaks <- seq(0, max(dat$x), len=5)
 dat$section <- cut(dat$x, breaks)
+
 ## Get the residuals
 dat$res <- residuals(lm(y ~ x, data=dat))
-## Compute densities for each section, flip the axes, add means of sections
-## Note: densities need to be scaled in relation to section size (2000 here)
+
+## Compute densities for each section, and flip the axes, and add means of sections
+## Note: the densities need to be scaled in relation to the section size (2000 here)
 dens <- do.call(rbind, lapply(split(dat, dat$section), function(x) {
-  d <- density(x$res, n=5000)
-  res <- data.frame(x=max(x$x)- d$y*2000, y=d$x+mean(x$y))
-  res <- res[order(res$y), ]
-  ## Get some data for normal lines as well
-  xs <- seq(min(x$res), max(x$res), len=5000)
-  res <- rbind(res, data.frame(y=xs + mean(x$y),
-                               x=max(x$x) - 2000*dnorm(xs, 0, sd(x$res))))
-  res$type <- rep(c("empirical", "normal"), each=5000)
-  res
+    d <- density(x$res, n=50)
+    res <- data.frame(x=max(x$x)- d$y*2000, y=d$x+mean(x$y))
+    res <- res[order(res$y), ]
+    ## Get some data for normal lines as well
+    xs <- seq(min(x$res), max(x$res), len=50)
+    res <- rbind(res, data.frame(y=xs + mean(x$y),
+                                 x=max(x$x) - 2000*dnorm(xs, 0, sd(x$res))))
+    res$type <- rep(c("empirical", "normal"), each=50)
+    res
 }))
-dens$section <- rep(levels(dat$section), each=10000)
+dens$section <- rep(levels(dat$section), each=100)
+
+dens <- dens %>%
+  filter(type == "normal")
+
+## Plot both empirical and theoretical
 ggplot(dat, aes(x, y)) +
-  geom_point(size = 0.1) +
-  geom_smooth(method="lm", fill=NA, lwd=2) +
-  geom_path(data=dens[dens$type=="normal",], aes(x, y, group=section), 
-            color="salmon", lwd=1.1) +
-  theme_bw() +
-  geom_vline(xintercept=breaks, lty=2)
+  geom_point(alpha = 0.05, size = 0.2) +
+  geom_smooth(method="lm", fill=NA, se = FALSE, color = "steelblue") +
+  geom_path(data=dens, aes(x, y, group=interaction(section)), color = "red", lwd=1.1) +
+geom_vline(xintercept=breaks, lty=2, color = "grey") +
+  labs(x = "x", 
+       y = "y") +
+  theme_classic() + 
+  theme(axis.title = element_text(size = 16),
+        axis.ticks = element_blank(), 
+       axis.text.x = element_blank(), 
+       axis.text.y = element_blank()
+      )
+  
 ```
-
-### Regression Model
-
-.alert[
-$$Y|X \sim N(\beta_0 + \beta_1 X, \sigma^2)$$
-]
-
---
-
-- For a single observation $(x_i, y_i)$
-
-$$y_i = \beta_0 + \beta_1 x_i + \epsilon_i \hspace{10mm} \epsilon_i \sim N(0,\sigma^2)$$
-<br><br>
 
 ---
 
-## Recap
---
+class: middle
+
+$$Y|X \sim N(\beta_0 + \beta_1 X, \sigma_\epsilon^2)$$
 
 
---
+```{r fig.height = 3.5}
+##   Code modified from https://stackoverflow.com/questions/31794876/ggplot2-how-to-curve-small-gaussian-densities-on-a-regression-line?rq=1
+
+## Modified based on BYSH: https://bookdown.org/roback/bookdown-bysh/ch-MLRreview.html#ordinary-least-squares-ols-assumptions
+
+set.seed(0)
+dat <- data.frame(x=(x=runif(10000, 0, 50)),
+                  y=rnorm(10000, 10*x, 100))
+
+## breaks: where you want to compute densities
+breaks <- seq(0, max(dat$x), len=5)
+dat$section <- cut(dat$x, breaks)
+
+## Get the residuals
+dat$res <- residuals(lm(y ~ x, data=dat))
+
+## Compute densities for each section, and flip the axes, and add means of sections
+## Note: the densities need to be scaled in relation to the section size (2000 here)
+dens <- do.call(rbind, lapply(split(dat, dat$section), function(x) {
+    d <- density(x$res, n=50)
+    res <- data.frame(x=max(x$x)- d$y*2000, y=d$x+mean(x$y))
+    res <- res[order(res$y), ]
+    ## Get some data for normal lines as well
+    xs <- seq(min(x$res), max(x$res), len=50)
+    res <- rbind(res, data.frame(y=xs + mean(x$y),
+                                 x=max(x$x) - 2000*dnorm(xs, 0, sd(x$res))))
+    res$type <- rep(c("empirical", "normal"), each=50)
+    res
+}))
+dens$section <- rep(levels(dat$section), each=100)
+
+dens <- dens %>%
+  filter(type == "normal")
+
+## Plot both empirical and theoretical
+ggplot(dat, aes(x, y)) +
+  geom_point(alpha = 0.05, size = 0.2) +
+  geom_smooth(method="lm", fill=NA, se = FALSE, color = "steelblue") +
+  geom_path(data=dens, aes(x, y, group=interaction(section)), color = "red", lwd=1.1) +
+geom_vline(xintercept=breaks, lty=2, color = "grey") +
+  labs(x = "x", 
+       y = "y") +
+  theme_classic() + 
+  annotate("text", x = 10, y = 600, label = latex2exp::TeX("$\\mu_Y = \\beta_0 + \\beta_1X$"), color = "steelblue", size = 8) +
+  theme(axis.title = element_text(size = 16),
+        axis.ticks = element_blank(), 
+       axis.text.x = element_blank(), 
+       axis.text.y = element_blank()
+      )
+  
+```
+
+---
+
+class: middle
+
+$$Y|X \sim N(\beta_0 + \beta_1 X, \sigma_\epsilon^2)$$
+
+
+```{r fig.height = 3.5}
+##   Code modified from https://stackoverflow.com/questions/31794876/ggplot2-how-to-curve-small-gaussian-densities-on-a-regression-line?rq=1
+
+## Modified based on BYSH: https://bookdown.org/roback/bookdown-bysh/ch-MLRreview.html#ordinary-least-squares-ols-assumptions
+
+set.seed(0)
+dat <- data.frame(x=(x=runif(10000, 0, 50)),
+                  y=rnorm(10000, 10*x, 100))
+
+## breaks: where you want to compute densities
+breaks <- seq(0, max(dat$x), len=5)
+dat$section <- cut(dat$x, breaks)
+
+## Get the residuals
+dat$res <- residuals(lm(y ~ x, data=dat))
+
+## Compute densities for each section, and flip the axes, and add means of sections
+## Note: the densities need to be scaled in relation to the section size (2000 here)
+dens <- do.call(rbind, lapply(split(dat, dat$section), function(x) {
+    d <- density(x$res, n=50)
+    res <- data.frame(x=max(x$x)- d$y*2000, y=d$x+mean(x$y))
+    res <- res[order(res$y), ]
+    ## Get some data for normal lines as well
+    xs <- seq(min(x$res), max(x$res), len=50)
+    res <- rbind(res, data.frame(y=xs + mean(x$y),
+                                 x=max(x$x) - 2000*dnorm(xs, 0, sd(x$res))))
+    res$type <- rep(c("empirical", "normal"), each=50)
+    res
+}))
+dens$section <- rep(levels(dat$section), each=100)
+
+dens <- dens %>%
+  filter(type == "normal")
+
+## Plot both empirical and theoretical
+ggplot(dat, aes(x, y)) +
+  geom_point(alpha = 0.05, size = 0.2) +
+  geom_smooth(method="lm", fill=NA, se = FALSE, color = "steelblue") +
+  geom_path(data=dens, aes(x, y, group=interaction(section)), color = "red", lwd=1.1) +
+geom_vline(xintercept=breaks, lty=2, color = "grey") +
+  labs(x = "x", 
+       y = "y") +
+  theme_classic() + 
+  annotate("text", x = 10, y = 600, label = latex2exp::TeX("$\\mu_Y = \\beta_0 + \\beta_1X$"), color = "steelblue", size = 8) +
+  annotate("text", x = 20, y = 400, label = latex2exp::TeX("$\\sigma_\\epsilon$"), color = "red", size = 8) +
+  theme(axis.title = element_text(size = 16),
+        axis.ticks = element_blank(), 
+        axis.text.x = element_blank(), 
+       axis.text.y = element_blank()
+      )
+  
+```
+
+---
+
+## Regression standard error 
+
+Once we fit the model, we can use the residuals to estimate the regression standard error, $\hat{\sigma}_\epsilon$
+
+.alert[
+$$\hat{\sigma}_\epsilon = \sqrt{\frac{\sum_\limits{i=1}^n(y_i - \hat{y}_i)^2}{n-2}} = \sqrt{\frac{\sum_\limits{i=1}^ne_i^2}{n-2}}$$
+]
+
 
 
