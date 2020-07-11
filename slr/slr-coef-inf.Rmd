@@ -105,34 +105,27 @@ ggplot(data = movie_scores, mapping = aes(x = critics, y = audience)) +
 
 ---
 
-## Questions of interest
-
---
-
-Is there truly linear relationship between `critics` and `audience`, or is the relationship we observed $(\hat{\beta}_1 = 0.519)$ due to random chance? 
-
-<br> 
-
---
-
-What is a plausible range of values of $\beta$, the true population slope for `critics`? 
-
----
-
 class: middle
 
-### Is there truly linear relationship between `critics` and `audience`, or is the relationshp we observed $(\hat{\beta}_1 = 0.519)$ due to random chance? 
-
+### Does the data provide sufficient evidence that $\beta_1$ is significantly different from 0? 
 
 ---
 
 ## Outline of a hypothesis test
 
+--
+
 `r emo::ji('one')` State the hypotheses.
+
+--
 
 `r emo::ji('two')` Calculate the test statistic. 
 
+--
+
 `r emo::ji('three')` Calculate the p-value.
+
+--
 
 `r emo::ji('four')` State the conclusion. 
 
@@ -236,7 +229,6 @@ model %>%
 
 <br> 
 
---
 
 .pull-left[
 .eq[
@@ -277,16 +269,7 @@ Calculated from a $t$ distribution with $n-2$ degrees of freedom
 
 ## `r emo::ji('three')` Calculate the p-value
 
-```{r}
-model %>%
-  tidy() %>%
-  kable(format = "html", digits = 3) %>%
-  row_spec(2, background = "#dce5b2")
-```
-
-<br> 
-
-```{r echo = F}
+```{r echo = F, fig.height = 4}
 ggplot(data.frame(x = c(-4, 4)), aes(x)) +
   stat_function(fun = dt, args =list(df =144)) +
   stat_function(fun = dt,   args =list(df =144),
@@ -295,9 +278,13 @@ ggplot(data.frame(x = c(-4, 4)), aes(x)) +
     stat_function(fun = dt,   args =list(df =144),
                 xlim = c(1.5, 4),
                 geom = "area", fill = "steelblue") +
+    geom_vline(xintercept = 1.5,linetype = "dashed") +
+    geom_vline(xintercept = -1.5,linetype = "dashed") +
     labs(x = "t", 
          y = "density") + 
-    annotate("text", x = 2.5, y = 0.35, label = "df = 144", size = 5) +
+    annotate("text", x = 2.6, y = 0.3, label = "|test statistic|") +
+  annotate("text", x = -2.6, y = 0.3, label = "-|test statistic|") +
+    ylim(0, NA) +
   theme_classic()
 ```
 
@@ -330,16 +317,20 @@ model %>%
 
 <br> 
 
-.vocab[The data provide sufficient evidence that there is a linear relationship between the critics score and audience score for movies on rottentomatoes.com. ]
+--
+
+The data provide sufficient evidence that the population slope $\beta_0$ is different from 0. 
+
+.vocab[There is a linear relationship between the critics score and audience score for movies on rottentomatoes.com.]
 
 
 ---
 
 class: middle, center
 
-### What is a plausible range of values of $\beta_1$, the true population slope for `critics` (?
+### What is a plausible range of values of values for the population slope $\beta_1$?
 
----
+--
 
 ## Confidence interval
 
@@ -354,13 +345,21 @@ $$\text{ Estimate} \pm \text{ (critical value) } \times \text{SE}$$
 
 ## Confidence interval for $\beta_1$
 
+.eq[
+$$\text{ Estimate} \pm \text{ (critical value) } \times \text{SE}$$
+]
+
+--
+
 .middle[
 .eq[
-$$\large{\hat{\beta}_1 \pm t^* \times SE_{\hat{\beta}_1}}$$
+$$\hat{\beta}_1 \pm t^* \times SE_{\hat{\beta}_1}$$
 ]
 ]
 
-$t^*$ is calculated from a $t$ distribution with $n-2$ degrees of freedom
+<br>
+
+.small[$t^*$ is calculated from a $t$ distribution with $n-2$ degrees of freedom]
   
 ---
 
@@ -374,6 +373,7 @@ model %>%
 ```
 
 $$\hat{\beta}_1 = 0.519 \hspace{15mm} t^* = 1.977 \hspace{15mm} SE_{\hat{\beta}_1} = 0.035$$
+--
 
 .eq[
 $$0.519 \pm 1.977 \times 0.035 \\[8pt]
@@ -388,29 +388,11 @@ $$0.519 \pm 1.977 \times 0.035 \\[8pt]
 $$\mathbf{[0.450, 0.588]}$$
 ]
 
+--
+
 <br>
 
 .vocab[We are 95% confident that for every one percent increase in the critics score, the audience score is predicted to increase between 0.450% and 0.588%.]
-
----
-
-## Distribution of $\hat{\beta}_1$
-
-.eq[
-$$\hat{\beta}_1 \sim N \Bigg(\beta_1, \sigma\sqrt{\frac{1}{(n-1)s_X^2}} \Bigg)$$
-]
-
----
-
-## $SE_{\hat{\beta}_1}$
-
-.eq[
-$$SE_{\hat{\beta}_1} = \sqrt{\frac{\hat{\sigma}^2}{\sum\limits_{i=1}^n (x_i - \bar{x})^2}} \hspace{2.5mm} = \hspace{2.5mm} \hat{\sigma}\sqrt{\frac{1}{(n-1)s_X^2}}$$
-]
-
---
-
-$$\hat{\sigma} = \sqrt{\frac{1}{n-2}\sum\limits_{i=1}^{n} e_i^2}$$
 
 ---
 

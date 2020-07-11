@@ -91,34 +91,27 @@ The data set contains the "Tomatometer" score (.term[critics]) and audience scor
 
 ---
 
-## Questions of interest
-
---
-
-Is there truly linear relationship between `critics` and `audience`, or is the relationship we observed `\((\hat{\beta}_1 = 0.519)\)` due to random chance? 
-
-&lt;br&gt; 
-
---
-
-What is a plausible range of values of `\(\beta\)`, the true population slope for `critics`? 
-
----
-
 class: middle
 
-### Is there truly linear relationship between `critics` and `audience`, or is the relationshp we observed `\((\hat{\beta}_1 = 0.519)\)` due to random chance? 
-
+### Does the data provide sufficient evidence that `\(\beta_1\)` is significantly different from 0? 
 
 ---
 
 ## Outline of a hypothesis test
 
+--
+
 1️⃣ State the hypotheses.
+
+--
 
 2️⃣ Calculate the test statistic. 
 
+--
+
 3️⃣ Calculate the p-value.
+
+--
 
 4️⃣ State the conclusion. 
 
@@ -331,7 +324,6 @@ class: middle
 
 &lt;br&gt; 
 
---
 
 .pull-left[
 .eq[
@@ -393,37 +385,7 @@ Calculated from a `\(t\)` distribution with `\(n-2\)` degrees of freedom
 
 ## 3️⃣ Calculate the p-value
 
-&lt;table&gt;
- &lt;thead&gt;
-  &lt;tr&gt;
-   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; std.error &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
-  &lt;/tr&gt;
- &lt;/thead&gt;
-&lt;tbody&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 32.316 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2.343 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 13.795 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;background-color: #dce5b2 !important;"&gt; critics &lt;/td&gt;
-   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.519 &lt;/td&gt;
-   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0.035 &lt;/td&gt;
-   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 15.028 &lt;/td&gt;
-   &lt;td style="text-align:right;background-color: #dce5b2 !important;"&gt; 0 &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;br&gt; 
-
-&lt;img src="slr-coef-inf_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="slr-coef-inf_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -475,16 +437,20 @@ Calculated from a `\(t\)` distribution with `\(n-2\)` degrees of freedom
 
 &lt;br&gt; 
 
-.vocab[The data provide sufficient evidence that there is a linear relationship between the critics score and audience score for movies on rottentomatoes.com. ]
+--
+
+The data provide sufficient evidence that the population slope `\(\beta_0\)` is different from 0. 
+
+.vocab[There is a linear relationship between the critics score and audience score for movies on rottentomatoes.com.]
 
 
 ---
 
 class: middle, center
 
-### What is a plausible range of values of `\(\beta_1\)`, the true population slope for `critics` (?
+### What is a plausible range of values of values for the population slope `\(\beta_1\)`?
 
----
+--
 
 ## Confidence interval
 
@@ -499,13 +465,21 @@ class: middle, center
 
 ## Confidence interval for `\(\beta_1\)`
 
+.eq[
+`$$\text{ Estimate} \pm \text{ (critical value) } \times \text{SE}$$`
+]
+
+--
+
 .middle[
 .eq[
-`$$\large{\hat{\beta}_1 \pm t^* \times SE_{\hat{\beta}_1}}$$`
+`$$\hat{\beta}_1 \pm t^* \times SE_{\hat{\beta}_1}$$`
 ]
 ]
 
-`\(t^*\)` is calculated from a `\(t\)` distribution with `\(n-2\)` degrees of freedom
+&lt;br&gt;
+
+.small[$t^*$ is calculated from a `\(t\)` distribution with `\(n-2\)` degrees of freedom]
   
 ---
 
@@ -540,6 +514,7 @@ class: middle, center
 &lt;/table&gt;
 
 `$$\hat{\beta}_1 = 0.519 \hspace{15mm} t^* = 1.977 \hspace{15mm} SE_{\hat{\beta}_1} = 0.035$$`
+--
 
 .eq[
 `$$0.519 \pm 1.977 \times 0.035 \\[8pt]
@@ -553,6 +528,8 @@ class: middle, center
 .eq[
 `$$\mathbf{[0.450, 0.588]}$$`
 ]
+
+--
 
 &lt;br&gt;
 
