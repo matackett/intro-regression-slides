@@ -273,7 +273,7 @@ geom_vline(xintercept=breaks, lty=2, color = "grey") +
 
 ## Regression standard error 
 
-Once we fit the model, we can use the residuals to to calculate the vocab[regression standard error, $\hat{\sigma}_\epsilon$]
+Once we fit the model, we can use the residuals to calculate the .vocab[regression standard error]
 
 .alert[
 $$\hat{\sigma}_\epsilon = \sqrt{\frac{\sum_\limits{i=1}^n(y_i - \hat{y}_i)^2}{n-2}} = \sqrt{\frac{\sum_\limits{i=1}^ne_i^2}{n-2}}$$
