@@ -36,11 +36,13 @@ class: title-slide
 `$$Y = f(X) + \epsilon$$`
 ]
 
+--
+
 `\(Y\)`: response variable
 
 --
 
-`\(X\)`: predictor variables
+`\(X\)`: predictor variable
 
 --
 
@@ -54,9 +56,10 @@ class: title-slide
 
 ## Simple linear regression
 
+--
+
 .eq[
-`$$\begin{aligned}Y &amp;= \color{purple}{\textbf{Model}} + \text{Error} \\[8pt]
-&amp;= \color{purple}{f(X)} + \epsilon \\[8pt]
+`$$\begin{aligned}Y &amp;= \color{purple}{f(X)} + \epsilon \\[8pt]
 &amp;= \color{purple}{\mu_{Y|X}} + \epsilon \\[8pt]
 &amp;= \color{purple}{\beta_0 + \beta_1 X} + \epsilon \end{aligned}$$`
 ]
@@ -69,13 +72,15 @@ class: middle
 `$$Y = \beta_0 + \beta_1 X + \epsilon$$`
 ]
 
+&lt;br&gt; 
+
 where the errors are independent and normally distribution, `\(\epsilon \sim N(0, \sigma_\epsilon)\)`
 
 ---
 
 class: middle
 
-`$$Y|X \sim N(\beta_0 + \beta_1 X, \sigma_\epsilon^2)$$`
+`$$Y|X \sim N(\beta_0 + \beta_1 X, \sigma_\epsilon)$$`
 
 
 &lt;img src="slr-foundation_files/figure-html/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /&gt;
@@ -102,11 +107,26 @@ class: middle
 
 ## Regression standard error 
 
-Once we fit the model, we can use the residuals to estimate the regression standard error, `\(\hat{\sigma}_\epsilon\)`
+Once we fit the model, we can use the residuals to to calculate the vocab[regression standard error, `\(\hat{\sigma}_\epsilon\)`]
 
 .alert[
 `$$\hat{\sigma}_\epsilon = \sqrt{\frac{\sum_\limits{i=1}^n(y_i - \hat{y}_i)^2}{n-2}} = \sqrt{\frac{\sum_\limits{i=1}^ne_i^2}{n-2}}$$`
 ]
+
+
+---
+
+## Standard error of `\(\hat{\beta}_1\)`
+
+.eq[
+`$$SE_{\hat{\beta}_1} = \hat{\sigma}_\epsilon\sqrt{\frac{1}{(n-1)s_X^2}}$$`
+]
+
+---
+
+class: middle
+
+&lt;img src="slr-foundation_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
